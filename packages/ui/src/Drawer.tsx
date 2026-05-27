@@ -44,17 +44,18 @@ export function Drawer({ open, onClose, children, title }: DrawerProps) {
 				onKeyDown={() => {}}
 				role="presentation"
 			/>
-			{/* Panel */}
-			<dialog
-				open={open || undefined}
-				className={`fixed right-0 top-0 z-50 m-0 flex h-full w-full max-w-md flex-col bg-white shadow-2xl transition-transform ${
-					open ? "translate-x-0" : "translate-x-full"
+			{/* biome-ignore lint/a11y/useSemanticElements: dialog element causes z-index stacking issues with open attribute */}
+			<div
+				role="dialog"
+				aria-modal={open ? "true" : undefined}
+				aria-label={title}
+				className={`fixed inset-y-0 right-0 z-50 m-0 flex w-full max-w-md flex-col bg-white p-0 shadow-2xl transition-transform ${
+					open ? "translate-x-0" : "pointer-events-none translate-x-full"
 				}`}
 				style={{
 					transitionDuration: "280ms",
 					transitionTimingFunction: "cubic-bezier(0.2, 0.7, 0.1, 1)",
 				}}
-				aria-label={title}
 			>
 				<div className="flex items-center justify-between border-b border-[rgba(13,13,13,0.12)] px-5 py-4">
 					{title && <h2 className="font-display text-xl">{title}</h2>}
@@ -67,8 +68,8 @@ export function Drawer({ open, onClose, children, title }: DrawerProps) {
 						&times;
 					</button>
 				</div>
-				<div className="flex-1 overflow-y-auto">{children}</div>
-			</dialog>
+				<div className="flex min-h-0 flex-1 flex-col overflow-y-auto">{children}</div>
+			</div>
 		</>
 	);
 }

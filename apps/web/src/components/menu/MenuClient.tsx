@@ -3,8 +3,24 @@
 import { useCartStore } from "@/lib/cartStore";
 import { formatLbp, formatUsd } from "@/lib/formatPrice";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { useCallback, useRef, useState } from "react";
 import { ModifierDrawer } from "./ModifierDrawer";
+
+/* ------------------------------------------------------------------ */
+/*  Photo map: slug → local image path                                 */
+/* ------------------------------------------------------------------ */
+
+const photoMap: Record<string, string> = {
+	"bunman-cheeseburger": "/menu/bunman-single.png",
+	"classic-cheeseburger": "/menu/classic-single.png",
+	"big-man": "/menu/big-man.png",
+	"double-bunman": "/menu/bunman-double.png",
+	"double-classic": "/menu/classic-double.png",
+	fries: "/menu/fries.png",
+	"chocolate-milkshake": "/menu/chocolate-milkshake.png",
+	"vanilla-milkshake": "/menu/vanilla-milkshake.png",
+};
 
 /* ------------------------------------------------------------------ */
 /*  Types (mirrors the server component's exports)                     */
@@ -115,12 +131,12 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 	return (
 		<>
 			{/* ---- Hero band ---- */}
-			<section className="mx-auto max-w-7xl px-5 pt-16 pb-8">
+			<section className="mx-auto max-w-3xl px-5 pt-16 pb-8">
 				<p className="caps text-ink-soft">{t("eyebrow")}</p>
 				<h1 className="font-display mt-2 text-5xl text-ink md:text-7xl">{t("headline")}</h1>
 
 				{/* Pickup / Delivery toggle */}
-				<div className="mt-8 inline-flex rounded-full border-2 border-ink p-1">
+				<div className="mt-8 inline-flex rounded-full border border-ink/20 p-0.5">
 					<button
 						type="button"
 						onClick={() => setMode("pickup")}
@@ -143,8 +159,8 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 			</section>
 
 			{/* ---- Category chips (sticky) ---- */}
-			<div className="sticky top-16 z-40 border-b border-rule bg-paper/95 backdrop-blur-sm">
-				<nav className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-5 py-3 scrollbar-none">
+			<div className="sticky top-16 z-40 border-b border-ink/10 bg-paper/95 backdrop-blur-sm">
+				<nav className="mx-auto flex max-w-3xl gap-2 overflow-x-auto px-5 py-3 scrollbar-none">
 					{grouped.map(({ category }) => (
 						<button
 							key={category.id}
@@ -153,7 +169,7 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 							className={`shrink-0 rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors duration-[var(--dur-fast)] ${
 								activeCategory === category.id
 									? "border-ink bg-ink text-paper"
-									: "border-ink bg-paper text-ink hover:bg-ink/5"
+									: "border-ink/20 bg-paper text-ink hover:bg-ink/5"
 							}`}
 						>
 							{category.name}
@@ -163,19 +179,21 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 			</div>
 
 			{/* ---- Menu sections ---- */}
-			<section className="mx-auto max-w-7xl px-5 pb-24">
+			<section className="mx-auto max-w-3xl px-5 pb-24">
 				{grouped.map(({ category, items: catItems }) => (
 					<div
 						key={category.id}
 						ref={(el) => {
 							sectionRefs.current[category.id] = el;
 						}}
-						className="pt-10"
+						className="pt-12"
 					>
-						<h2 className="font-display text-3xl uppercase text-ink">{category.name}</h2>
-						<div className="mt-3 border-b border-ink" />
+						<h2 className="font-display text-2xl uppercase tracking-wide text-ink">
+							{category.name}
+						</h2>
+						<div className="mt-2 border-b border-ink" />
 
-						<div className="mt-4 divide-y divide-rule">
+						<div className="mt-1">
 							{catItems.map((item) => (
 								<MenuItemRow
 									key={item.id}
@@ -213,23 +231,45 @@ function MenuItemRow({
 }) {
 	const soldOut = !item.isAvailable;
 	const hasModifiers = item.modifierGroups.length > 0;
+	const photo = photoMap[item.slug] ?? null;
 
 	return (
 		<div
-			className={`flex items-start gap-4 rounded-lg border border-rule bg-white p-4 my-2 ${soldOut ? "opacity-50" : ""}`}
+			className={`flex items-center gap-4 border-b border-ink/10 py-5 ${soldOut ? "opacity-50" : ""}`}
 		>
-			{/* Left: name + description */}
+			{/* Photo */}
+			{photo && (
+				<div
+					className={`relative shrink-0 h-[80px] w-[80px] sm:h-[100px] sm:w-[100px] ${soldOut ? "grayscale" : ""}`}
+				>
+					<Image
+						src={photo}
+						alt={item.name}
+						width={100}
+						height={100}
+						className="h-full w-full object-contain"
+					/>
+				</div>
+			)}
+
+			{/* Middle: name + description + actions */}
 			<div className="min-w-0 flex-1">
 				<div className="flex items-center gap-2">
-					<span className="font-display text-lg text-ink">{item.name}</span>
-					{soldOut && <span className="text-xs font-semibold text-ink-soft">{t("soldOut")}</span>}
+					<span className="font-display text-lg uppercase text-ink">{item.name}</span>
+					{soldOut && (
+						<span className="rounded bg-ink/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-ink-soft">
+							{t("soldOut")}
+						</span>
+					)}
 				</div>
 				{item.description && (
-					<p className="mt-0.5 text-sm text-ink-soft line-clamp-2">{item.description}</p>
+					<p className="mt-0.5 text-sm leading-snug text-ink-soft line-clamp-2">
+						{item.description}
+					</p>
 				)}
 
 				{/* Action buttons */}
-				<div className="mt-2 flex items-center gap-3">
+				<div className="mt-2.5 flex items-center gap-3">
 					<button
 						type="button"
 						disabled={soldOut}
@@ -254,7 +294,7 @@ function MenuItemRow({
 
 			{/* Right: price */}
 			<div className="shrink-0 text-right">
-				<span className="num font-bold text-ink">{formatUsd(item.basePriceUsd)}</span>
+				<span className="font-display text-lg text-ink">{formatUsd(item.basePriceUsd)}</span>
 				<span className="num mt-0.5 block text-xs text-ink-soft">
 					{formatLbp(item.basePriceUsd)}
 				</span>

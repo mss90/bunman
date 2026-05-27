@@ -25,7 +25,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 	return (
 		<Drawer open={open} onClose={onClose} title={t("title")}>
 			{items.length === 0 ? (
-				<div className="flex flex-col items-center justify-center gap-4 px-5 py-16">
+				<div className="flex flex-1 flex-col items-center justify-center gap-4 px-5">
 					<p className="text-lg text-black/50">{t("empty")}</p>
 					<Link
 						href="/menu"
