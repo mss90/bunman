@@ -1,7 +1,6 @@
 "use client";
 
 import { type ReactNode, useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 
 interface DrawerProps {
 	open: boolean;
@@ -11,12 +10,26 @@ interface DrawerProps {
 }
 
 export function Drawer({ open, onClose, children, title }: DrawerProps) {
-	const [mounted, setMounted] = useState(false);
+	const [visible, setVisible] = useState(false);
+	const [animateIn, setAnimateIn] = useState(false);
 
-	// Wait for client mount so document.body is available for the portal
+	// When open becomes true, first mount (visible), then on next frame animate in
 	useEffect(() => {
-		setMounted(true);
-	}, []);
+		if (open) {
+			setVisible(true);
+			// Wait one frame so the translate-x-full is painted, then slide in
+			const raf = requestAnimationFrame(() => {
+				requestAnimationFrame(() => {
+					setAnimateIn(true);
+				});
+			});
+			return () => cancelAnimationFrame(raf);
+		}
+		// When closing, animate out first, then unmount
+		setAnimateIn(false);
+		const timer = setTimeout(() => setVisible(false), 300);
+		return () => clearTimeout(timer);
+	}, [open]);
 
 	// Lock body scroll when open
 	useEffect(() => {
@@ -40,14 +53,15 @@ export function Drawer({ open, onClose, children, title }: DrawerProps) {
 		return () => window.removeEventListener("keydown", handleEsc);
 	}, [open, onClose]);
 
-	if (!mounted) return null;
+	// When not visible, render nothing — no portal, no hidden DOM, nothing
+	if (!visible) return null;
 
-	return createPortal(
-		<>
+	return (
+		<div className="fixed inset-0 z-[9999]">
 			{/* Overlay */}
 			<div
-				className={`fixed inset-0 z-[60] bg-black/40 transition-opacity duration-300 ${
-					open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+				className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${
+					animateIn ? "opacity-100" : "opacity-0"
 				}`}
 				onClick={onClose}
 				onKeyDown={(e) => {
@@ -61,10 +75,10 @@ export function Drawer({ open, onClose, children, title }: DrawerProps) {
 			{/* biome-ignore lint/a11y/useSemanticElements: dialog element causes z-index stacking issues with open attribute */}
 			<div
 				role="dialog"
-				aria-modal={open ? "true" : undefined}
+				aria-modal="true"
 				aria-label={title}
-				className={`fixed inset-y-0 right-0 z-[60] flex w-full max-w-md flex-col bg-white shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.1,1)] ${
-					open ? "pointer-events-auto translate-x-0" : "pointer-events-none translate-x-full"
+				className={`absolute inset-y-0 right-0 flex w-full max-w-md flex-col bg-white shadow-2xl transition-transform duration-300 ease-[cubic-bezier(0.2,0.7,0.1,1)] ${
+					animateIn ? "translate-x-0" : "translate-x-full"
 				}`}
 			>
 				{/* Header */}
@@ -97,7 +111,6 @@ export function Drawer({ open, onClose, children, title }: DrawerProps) {
 				{/* Content */}
 				<div className="flex min-h-0 flex-1 flex-col overflow-y-auto">{children}</div>
 			</div>
-		</>,
-		document.body,
+		</div>
 	);
 }

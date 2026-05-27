@@ -25,7 +25,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 				/* ---- Empty state ---- */
 				<div className="flex flex-1 flex-col items-center justify-center gap-5 px-6">
 					{/* Bag icon */}
-					<div className="flex h-20 w-20 items-center justify-center rounded-full bg-black/5">
+					<div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#0d0d0d]/5">
 						<svg
 							aria-hidden="true"
 							xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 							strokeWidth="1.5"
 							strokeLinecap="round"
 							strokeLinejoin="round"
-							className="text-black/30"
+							className="text-[#0d0d0d]/30"
 						>
 							<path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
 							<line x1="3" y1="6" x2="21" y2="6" />
@@ -45,13 +45,13 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 						</svg>
 					</div>
 					<div className="text-center">
-						<p className="text-lg font-semibold text-black">{t("empty")}</p>
-						<p className="mt-1 text-sm text-black/40">Add items from the menu to get started</p>
+						<p className="text-lg font-semibold text-[#0d0d0d]">{t("empty")}</p>
+						<p className="mt-1 text-sm text-[#0d0d0d]/40">Add items from the menu to get started</p>
 					</div>
 					<Link
 						href="/menu"
 						onClick={onClose}
-						className="mt-2 inline-block rounded-full bg-black px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-black/80"
+						className="mt-2 inline-block rounded-full bg-[#0d0d0d] px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0d0d0d]/80"
 					>
 						Browse menu
 					</Link>
@@ -68,37 +68,37 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 							const lineTotal = (base + modsTotal) * item.qty;
 
 							return (
-								<div key={key} className="border-b border-black/[0.06] py-4 last:border-b-0">
+								<div key={key} className="border-b border-[#0d0d0d]/[0.06] py-4 last:border-b-0">
 									{/* Top row: name + price */}
 									<div className="flex items-start justify-between gap-3">
 										<div className="flex-1">
-											<p className="font-semibold text-black">{item.name}</p>
+											<p className="font-semibold text-[#0d0d0d]">{item.name}</p>
 											{item.modifiers.length > 0 && (
-												<p className="mt-0.5 text-xs text-black/50">
+												<p className="mt-0.5 text-xs text-[#0d0d0d]/50">
 													{item.modifiers.map((m) => m.name).join(", ")}
 												</p>
 											)}
 										</div>
-										<p className="text-sm font-semibold text-black">{formatUsd(lineTotal)}</p>
+										<p className="text-sm font-semibold text-[#0d0d0d]">{formatUsd(lineTotal)}</p>
 									</div>
 
 									{/* Bottom row: qty stepper + trash */}
 									<div className="mt-3 flex items-center justify-between">
-										<div className="flex items-center rounded-full border border-black/15">
+										<div className="flex items-center rounded-full border border-[#0d0d0d]/15">
 											<button
 												type="button"
-												className="flex h-8 w-8 items-center justify-center text-sm text-black/50 transition-colors hover:text-black"
+												className="flex h-8 w-8 items-center justify-center text-sm text-[#0d0d0d]/50 transition-colors hover:text-[#0d0d0d]"
 												onClick={() => updateQty(item.menuItemId, key, item.qty - 1)}
 												aria-label="Decrease quantity"
 											>
 												&minus;
 											</button>
-											<span className="w-8 text-center text-sm font-semibold text-black">
+											<span className="w-8 text-center text-sm font-semibold text-[#0d0d0d]">
 												{item.qty}
 											</span>
 											<button
 												type="button"
-												className="flex h-8 w-8 items-center justify-center text-sm text-black/50 transition-colors hover:text-black"
+												className="flex h-8 w-8 items-center justify-center text-sm text-[#0d0d0d]/50 transition-colors hover:text-[#0d0d0d]"
 												onClick={() => updateQty(item.menuItemId, key, item.qty + 1)}
 												aria-label="Increase quantity"
 											>
@@ -109,7 +109,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 										{/* Trash icon button */}
 										<button
 											type="button"
-											className="flex h-8 w-8 items-center justify-center rounded-full text-black/30 transition-colors hover:bg-red-50 hover:text-red-500"
+											className="flex h-8 w-8 items-center justify-center rounded-full text-[#0d0d0d]/30 transition-colors hover:bg-red-50 hover:text-red-500"
 											onClick={() => remove(item.menuItemId, key)}
 											aria-label={`Remove ${item.name}`}
 										>
@@ -138,19 +138,19 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 					</div>
 
 					{/* Bottom sticky area */}
-					<div className="border-t border-black/10 bg-white px-5 pb-6 pt-4">
+					<div className="border-t border-[#0d0d0d]/10 bg-white px-5 pb-6 pt-4">
 						{/* Subtotal */}
 						<div className="flex items-center justify-between">
-							<span className="text-sm text-black/60">Subtotal</span>
-							<span className="text-sm font-medium text-black">{formatUsd(subtotal)}</span>
+							<span className="text-sm text-[#0d0d0d]/60">Subtotal</span>
+							<span className="text-sm font-medium text-[#0d0d0d]">{formatUsd(subtotal)}</span>
 						</div>
-						<p className="mt-1 text-xs text-black/40">View full summary at checkout</p>
+						<p className="mt-1 text-xs text-[#0d0d0d]/40">View full summary at checkout</p>
 
 						{/* Checkout button */}
 						<Link
 							href="/checkout"
 							onClick={onClose}
-							className="mt-4 block w-full rounded-xl bg-black py-4 text-center text-sm font-semibold text-white transition-colors hover:bg-black/85"
+							className="mt-4 block w-full rounded-xl bg-[#0d0d0d] py-4 text-center text-sm font-semibold text-white transition-colors hover:bg-[#0d0d0d]/85"
 						>
 							{t("checkout")}
 						</Link>
@@ -159,7 +159,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 						<button
 							type="button"
 							onClick={clear}
-							className="mt-3 w-full text-center text-xs text-black/40 transition-colors hover:text-black/70"
+							className="mt-3 w-full text-center text-xs text-[#0d0d0d]/40 transition-colors hover:text-[#0d0d0d]/70"
 						>
 							{t("clearBag")}
 						</button>

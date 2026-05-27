@@ -135,17 +135,17 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 		.filter((g) => g.items.length > 0);
 
 	return (
-		<>
+		<div className="bg-[#FFF8EC]">
 			{/* ---- Hero area ---- */}
 			<section className="mx-auto max-w-2xl px-5 pt-16 pb-6 text-center">
-				<h1 className="font-display text-4xl uppercase tracking-wide text-ink">MENU</h1>
+				<h1 className="font-display text-4xl uppercase tracking-wide text-[#0d0d0d]">MENU</h1>
 
 				{/* Pickup / Delivery segmented control */}
 				<div className="mt-6 flex justify-center">
-					<div className="relative inline-flex rounded-full bg-[#f0f0f0] p-1">
+					<div className="relative inline-flex rounded-full bg-[#F5ECD6] p-1">
 						{/* Sliding pill */}
 						<div
-							className="absolute top-1 bottom-1 rounded-full bg-black transition-all duration-300 ease-in-out"
+							className="absolute top-1 bottom-1 rounded-full bg-[#0d0d0d] transition-all duration-300 ease-in-out"
 							style={{
 								width: "calc(50% - 4px)",
 								left: mode === "pickup" ? "4px" : "calc(50% + 0px)",
@@ -155,7 +155,7 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 							type="button"
 							onClick={() => setMode("pickup")}
 							className={`relative z-10 rounded-full px-8 py-2.5 text-sm font-semibold transition-colors duration-300 ${
-								mode === "pickup" ? "text-white" : "text-black/60"
+								mode === "pickup" ? "text-[#FFF8EC]" : "text-[#0d0d0d]/60"
 							}`}
 						>
 							{t("pickup")}
@@ -164,7 +164,7 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 							type="button"
 							onClick={() => setMode("delivery")}
 							className={`relative z-10 rounded-full px-8 py-2.5 text-sm font-semibold transition-colors duration-300 ${
-								mode === "delivery" ? "text-white" : "text-black/60"
+								mode === "delivery" ? "text-[#FFF8EC]" : "text-[#0d0d0d]/60"
 							}`}
 						>
 							{t("delivery")}
@@ -174,7 +174,7 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 			</section>
 
 			{/* ---- Category chips (sticky) ---- */}
-			<div className="sticky top-16 z-40 bg-white/95 backdrop-blur-sm">
+			<div className="sticky top-16 z-40 bg-[#FFF8EC]/95 backdrop-blur-sm">
 				<nav className="mx-auto flex max-w-2xl gap-2 overflow-x-auto px-5 py-3 scrollbar-none">
 					{grouped.map(({ category }) => (
 						<button
@@ -186,15 +186,15 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 							onClick={() => scrollTo(category.id)}
 							className={`shrink-0 rounded-full px-5 py-2 text-sm font-semibold transition-all duration-200 ${
 								activeCategory === category.id
-									? "bg-black text-white"
-									: "border border-black/15 bg-transparent text-black"
+									? "bg-[#0d0d0d] text-[#FFF8EC]"
+									: "border border-[#0d0d0d]/15 bg-transparent text-[#0d0d0d]"
 							}`}
 						>
 							{category.name}
 						</button>
 					))}
 				</nav>
-				<div className="mx-auto max-w-2xl border-b border-black/5" />
+				<div className="mx-auto max-w-2xl border-b border-[#0d0d0d]/5" />
 			</div>
 
 			{/* ---- Menu sections ---- */}
@@ -207,10 +207,10 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 						}}
 						className="pt-10"
 					>
-						<h2 className="font-display text-xl uppercase tracking-wide text-ink">
+						<h2 className="font-display text-xl uppercase tracking-wide text-[#0d0d0d]">
 							{category.name}
 						</h2>
-						<div className="mt-2 border-b border-black/10" />
+						<div className="mt-2 border-b border-[#0d0d0d]/10" />
 
 						<div className="mt-1">
 							{catItems.map((item) => (
@@ -229,7 +229,7 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 
 			{/* ---- Modifier drawer ---- */}
 			<ModifierDrawer item={drawerItem} onClose={() => setDrawerItem(null)} />
-		</>
+		</div>
 	);
 }
 
@@ -254,26 +254,28 @@ function MenuItemRow({
 
 	return (
 		<div
-			className={`flex items-start gap-4 border-b border-black/5 py-4 ${soldOut ? "opacity-40" : ""}`}
+			className={`flex items-start gap-4 border-b border-[#0d0d0d]/5 py-4 ${soldOut ? "opacity-40" : ""}`}
 		>
 			{/* Left side: text content */}
 			<div className="min-w-0 flex-1">
 				<div className="flex items-center gap-2">
-					<span className="text-base font-semibold text-ink">{item.name}</span>
+					<span className="text-base font-semibold text-[#0d0d0d]">{item.name}</span>
 					{soldOut && (
-						<span className="rounded-full bg-black/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-black/50">
+						<span className="rounded-full bg-[#0d0d0d]/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#0d0d0d]/50">
 							Unavailable
 						</span>
 					)}
 				</div>
 				{item.description && (
-					<p className="mt-1 text-sm leading-snug text-black/50 line-clamp-2">{item.description}</p>
+					<p className="mt-1 text-sm leading-snug text-[#0d0d0d]/50 line-clamp-2">
+						{item.description}
+					</p>
 				)}
 
 				{/* Price */}
-				<p className="mt-1 text-sm font-semibold text-ink">
+				<p className="mt-1 text-sm font-semibold text-[#0d0d0d]">
 					{formatUsd(item.basePriceUsd)}
-					<span className="num ml-1.5 font-normal text-black/40 text-xs">
+					<span className="num ml-1.5 font-normal text-[#0d0d0d]/40 text-xs">
 						{formatLbp(item.basePriceUsd)}
 					</span>
 				</p>
@@ -284,7 +286,7 @@ function MenuItemRow({
 						type="button"
 						disabled={soldOut}
 						onClick={() => onQuickAdd(item)}
-						className="rounded-full bg-black px-4 py-1.5 text-xs font-semibold text-white transition-opacity duration-200 hover:opacity-80 disabled:pointer-events-none disabled:opacity-40"
+						className="rounded-full bg-[#0d0d0d] px-4 py-1.5 text-xs font-semibold text-[#FFF8EC] transition-opacity duration-200 hover:opacity-80 disabled:pointer-events-none disabled:opacity-40"
 					>
 						Add
 					</button>
@@ -293,7 +295,7 @@ function MenuItemRow({
 							type="button"
 							disabled={soldOut}
 							onClick={() => onCustomize(item)}
-							className="text-xs font-semibold text-black/60 underline underline-offset-2 transition-opacity duration-200 hover:opacity-70 disabled:pointer-events-none disabled:opacity-40"
+							className="text-xs font-semibold text-[#0d0d0d]/60 underline underline-offset-2 transition-opacity duration-200 hover:opacity-70 disabled:pointer-events-none disabled:opacity-40"
 						>
 							{t("customize")}
 						</button>
@@ -304,7 +306,7 @@ function MenuItemRow({
 			{/* Right side: product photo */}
 			{photo && (
 				<div
-					className={`relative shrink-0 h-[90px] w-[90px] overflow-hidden rounded-xl bg-[#f5f5f5] ${soldOut ? "grayscale" : ""}`}
+					className={`relative shrink-0 h-[90px] w-[90px] overflow-hidden rounded-xl bg-[#F5ECD6] ${soldOut ? "grayscale" : ""}`}
 				>
 					<Image
 						src={photo}

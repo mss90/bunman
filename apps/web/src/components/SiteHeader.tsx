@@ -4,7 +4,6 @@ import { Link, usePathname } from "@/i18n/navigation";
 import { useCartStore } from "@/lib/cartStore";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import { CartDrawer } from "./CartDrawer";
 
 const NAV_LINKS = [
@@ -20,12 +19,7 @@ export function SiteHeader() {
 	const pathname = usePathname();
 	const [cartOpen, setCartOpen] = useState(false);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-	const [mounted, setMounted] = useState(false);
 	const totalItems = useCartStore((s) => s.totalItems());
-
-	useEffect(() => {
-		setMounted(true);
-	}, []);
 
 	// Lock body scroll when mobile menu is open
 	useEffect(() => {
@@ -56,20 +50,20 @@ export function SiteHeader() {
 
 	return (
 		<>
-			<header className="sticky top-0 z-40 bg-white shadow-sm">
+			<header className="sticky top-0 z-40 bg-[#FFF8EC] shadow-sm">
 				<div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5">
 					{/* Logo */}
 					<Link href="/" className="flex-shrink-0">
 						<img src="/logo.png" alt="BUNMAN" className="h-8" />
 					</Link>
 
-					{/* Desktop nav — centered */}
+					{/* Desktop nav -- centered */}
 					<nav className="hidden items-center gap-8 md:flex">
 						{NAV_LINKS.map((link) => (
 							<Link
 								key={link.href}
 								href={link.href}
-								className={`text-sm font-medium text-black transition-colors hover:text-black/70 ${
+								className={`text-sm font-medium text-[#0d0d0d] transition-colors hover:text-[#0d0d0d]/70 ${
 									isActive(link.href) ? "underline underline-offset-4 decoration-2" : ""
 								}`}
 							>
@@ -107,7 +101,7 @@ export function SiteHeader() {
 
 							{/* Badge */}
 							{totalItems > 0 && (
-								<span className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-black text-[10px] font-bold text-white">
+								<span className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#0d0d0d] text-[10px] font-bold text-[#FFF8EC]">
 									{totalItems > 99 ? "99+" : totalItems}
 								</span>
 							)}
@@ -120,81 +114,65 @@ export function SiteHeader() {
 							className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full transition-colors hover:bg-black/5 md:hidden"
 							aria-label="Open menu"
 						>
-							<span className="block h-[2px] w-5 rounded-full bg-black" />
-							<span className="block h-[2px] w-5 rounded-full bg-black" />
-							<span className="block h-[2px] w-5 rounded-full bg-black" />
+							<span className="block h-[2px] w-5 rounded-full bg-[#0d0d0d]" />
+							<span className="block h-[2px] w-5 rounded-full bg-[#0d0d0d]" />
+							<span className="block h-[2px] w-5 rounded-full bg-[#0d0d0d]" />
 						</button>
 					</div>
 				</div>
 			</header>
 
-			{/* Mobile full-screen overlay nav — portaled to body at z-[70] */}
-			{mounted &&
-				createPortal(
-					<div
-						className={`fixed inset-0 z-[70] bg-black transition-opacity duration-300 ${
-							mobileMenuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-						}`}
-						aria-hidden={!mobileMenuOpen}
-					>
-						<div className="flex h-full flex-col px-8 py-8">
-							{/* Top bar: logo + close */}
-							<div className="flex items-center justify-between">
-								<Link
-									href="/"
-									onClick={() => setMobileMenuOpen(false)}
-									className="opacity-0"
+			{/* Mobile full-screen overlay nav -- unmounts when closed */}
+			{mobileMenuOpen && (
+				<div className="fixed inset-0 z-[9998] bg-[#0d0d0d]" aria-hidden={!mobileMenuOpen}>
+					<div className="flex h-full flex-col px-8 py-8">
+						{/* Top bar: spacer + close */}
+						<div className="flex items-center justify-between">
+							<span className="h-8" aria-hidden="true" />
+							<button
+								type="button"
+								onClick={() => setMobileMenuOpen(false)}
+								className="flex h-10 w-10 items-center justify-center rounded-full text-[#FFF8EC] transition-colors hover:bg-white/10"
+								aria-label="Close menu"
+							>
+								<svg
 									aria-hidden="true"
-									tabIndex={-1}
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
 								>
-									{/* Invisible spacer to balance layout */}
-									<span className="h-8" />
-								</Link>
-								<button
-									type="button"
-									onClick={() => setMobileMenuOpen(false)}
-									className="flex h-10 w-10 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10"
-									aria-label="Close menu"
-								>
-									<svg
-										aria-hidden="true"
-										xmlns="http://www.w3.org/2000/svg"
-										width="24"
-										height="24"
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<line x1="18" y1="6" x2="6" y2="18" />
-										<line x1="6" y1="6" x2="18" y2="18" />
-									</svg>
-								</button>
-							</div>
-
-							{/* Nav links */}
-							<nav className="mt-16 flex flex-1 flex-col gap-8">
-								{NAV_LINKS.map((link) => (
-									<Link
-										key={link.href}
-										href={link.href}
-										onClick={() => setMobileMenuOpen(false)}
-										className={`text-3xl font-light text-white transition-opacity hover:opacity-70 ${
-											isActive(link.href) ? "underline underline-offset-8 decoration-1" : ""
-										}`}
-									>
-										{t(link.labelKey)}
-									</Link>
-								))}
-							</nav>
+									<line x1="18" y1="6" x2="6" y2="18" />
+									<line x1="6" y1="6" x2="18" y2="18" />
+								</svg>
+							</button>
 						</div>
-					</div>,
-					document.body,
-				)}
 
-			{/* CartDrawer — uses portal internally, so no z-index conflict */}
+						{/* Nav links */}
+						<nav className="mt-16 flex flex-1 flex-col gap-8">
+							{NAV_LINKS.map((link) => (
+								<Link
+									key={link.href}
+									href={link.href}
+									onClick={() => setMobileMenuOpen(false)}
+									className={`text-3xl font-light text-[#FFF8EC] transition-opacity hover:opacity-70 ${
+										isActive(link.href) ? "underline underline-offset-8 decoration-1" : ""
+									}`}
+								>
+									{t(link.labelKey)}
+								</Link>
+							))}
+						</nav>
+					</div>
+				</div>
+			)}
+
+			{/* CartDrawer */}
 			<CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
 		</>
 	);

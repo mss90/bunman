@@ -4,26 +4,26 @@ import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const featured = [
+const quickMenu = [
 	{
 		src: "/menu/bunman-single.png",
-		name: "Bunman Single",
-		desc: "Our signature smash patty with American cheese.",
+		name: "Bunman Cheeseburger",
+		price: "$7.50",
 	},
 	{
 		src: "/menu/big-man.png",
 		name: "Big Man",
-		desc: "Double stacked. No mercy.",
+		price: "$11.00",
 	},
 	{
 		src: "/menu/classic-single.png",
-		name: "Classic Single",
-		desc: "Simple. Clean. Smashed to perfection.",
+		name: "Classic Cheeseburger",
+		price: "$6.50",
 	},
 	{
 		src: "/menu/fries.png",
 		name: "Fries",
-		desc: "Golden, crispy, and salted right.",
+		price: "$3.00",
 	},
 ] as const;
 
@@ -40,104 +40,78 @@ export default function HomePage() {
 			className={`transition-opacity duration-700 ease-out ${entered ? "opacity-100" : "opacity-0"}`}
 		>
 			{/* ───────────────── HERO ───────────────── */}
-			<section className="flex min-h-[85vh] flex-col items-center justify-center px-5 py-24">
+			<section className="flex min-h-[80vh] flex-col items-center justify-center bg-[#FFF8EC] px-5 py-24">
 				<Image
 					src="/logo.png"
 					alt="BUNMAN"
-					width={280}
-					height={93}
+					width={320}
+					height={107}
 					priority
-					className="w-[180px] md:w-[280px]"
+					className="w-[220px] md:w-[320px]"
 				/>
 
-				<div className="mt-10 flex flex-col items-center gap-1">
-					<p className="font-display text-xl uppercase tracking-[0.2em] text-black/80 md:text-3xl">
+				<div className="mt-8 flex flex-col items-center gap-0.5">
+					<p className="font-display text-base uppercase tracking-[0.15em] text-[#0d0d0d]/60 md:text-xl">
 						GREAT BURGERS.
 					</p>
-					<p className="font-display text-xl uppercase tracking-[0.2em] text-black/80 md:text-3xl">
+					<p className="font-display text-base uppercase tracking-[0.15em] text-[#0d0d0d]/60 md:text-xl">
 						BAD TANTRUMS.
 					</p>
 				</div>
 
-				<div className="mt-8 h-px w-12 bg-black/20" />
-
-				<p className="mt-6 text-xs uppercase tracking-[0.3em] text-black/40">Mar Mikhael, Beirut</p>
-
 				<Link
 					href="/menu"
-					className="mt-10 rounded-full bg-black px-10 py-4 text-sm font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-80"
+					className="mt-10 rounded-full bg-[#0d0d0d] px-12 py-4 text-sm uppercase tracking-widest text-[#FFF8EC] transition-opacity hover:opacity-80"
 				>
-					Order Now
-				</Link>
-
-				<Link
-					href="/menu"
-					className="mt-4 text-xs uppercase tracking-widest text-black/40 transition-opacity hover:opacity-70"
-				>
-					or view our menu &rarr;
+					ORDER NOW
 				</Link>
 			</section>
 
-			{/* ───────────── FEATURED ITEMS ───────────── */}
-			<section className="bg-[#fafafa] px-5 py-24">
-				<p className="text-center text-xs font-medium uppercase tracking-widest text-black/40">
-					Our Favorites
-				</p>
-
-				{/* Horizontal scroll on mobile, 4-col grid on desktop */}
-				<div className="scrollbar-none mx-auto mt-12 flex max-w-5xl gap-5 overflow-x-auto px-1 pb-4 md:grid md:grid-cols-4 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
-					{featured.map((item) => (
+			{/* ───────────── QUICK MENU CARDS ───────────── */}
+			<section className="bg-[#FFF8EC] px-5 pb-16 pt-4">
+				<div className="scrollbar-none mx-auto flex max-w-3xl gap-4 overflow-x-auto pb-4 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0">
+					{quickMenu.map((item) => (
 						<Link
 							key={item.name}
 							href="/menu"
 							className="group flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md"
-							style={{ width: "min(72vw, 260px)" }}
+							style={{ width: "min(72vw, 280px)" }}
 						>
-							<div className="flex items-center justify-center p-4" style={{ width: "100%" }}>
+							<div className="flex h-40 items-center justify-center bg-[#F5ECD6]">
 								<Image
 									src={item.src}
 									alt={item.name}
-									width={200}
-									height={200}
-									className="object-contain"
+									width={160}
+									height={160}
+									className="h-32 w-32 object-contain"
 								/>
 							</div>
-							<div className="px-5 pb-5">
-								<h3 className="text-sm font-semibold text-black">{item.name}</h3>
-								<p className="mt-1 text-xs text-black/50">{item.desc}</p>
+							<div className="flex items-center justify-between px-4 py-3">
+								<span className="text-sm font-semibold text-[#0d0d0d]">{item.name}</span>
+								<span className="text-sm font-medium text-[#0d0d0d]/50">{item.price}</span>
 							</div>
 						</Link>
 					))}
 				</div>
 			</section>
 
-			{/* ───────────── INFO STRIP ───────────── */}
-			<section className="px-5 py-20">
-				<div className="mx-auto grid max-w-3xl grid-cols-1 gap-12 text-center md:grid-cols-3 md:gap-8">
+			{/* ───────────── INFO BAR ───────────── */}
+			<section className="bg-[#FFF8EC] px-5 pb-12">
+				<div className="mx-auto grid max-w-xl grid-cols-3 text-center">
 					<div>
-						<p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-black/30">
-							Hours
+						<p className="text-xs font-bold uppercase tracking-widest text-[#0d0d0d]/30">
+							12PM&ndash;12AM
 						</p>
-						<p className="mt-2 text-sm text-black/70">Open 7/7</p>
-						<p className="text-sm text-black/70">12pm &ndash; 12am</p>
 					</div>
 					<div>
-						<p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-black/30">
-							Location
+						<p className="text-xs font-bold uppercase tracking-widest text-[#0d0d0d]/30">
+							MAR MIKHAEL
 						</p>
-						<p className="mt-2 text-sm text-black/70">Mar Mikhael</p>
-						<p className="text-sm text-black/70">Beirut, Lebanon</p>
 					</div>
 					<div>
-						<p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-black/30">
-							Phone
+						<p className="text-xs font-bold uppercase tracking-widest text-[#0d0d0d]/30">
+							03-BUNMAN
 						</p>
-						<a
-							href="tel:+9613286626"
-							className="mt-2 inline-block text-sm text-black/70 transition-opacity hover:opacity-50"
-						>
-							+961 3 286 626
-						</a>
 					</div>
 				</div>
 			</section>

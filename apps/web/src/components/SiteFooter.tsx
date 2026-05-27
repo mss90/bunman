@@ -1,35 +1,34 @@
 export function SiteFooter() {
 	return (
-		<footer className="bg-[#111] text-white">
-			<div className="mx-auto max-w-7xl px-5 py-10">
-				<div className="flex flex-col items-center gap-6 text-center">
-					<p className="text-sm text-white/70">Mar Mikhael, Beirut | Open 7/7 12pm &ndash; 12am</p>
+		<footer className="bg-[#0d0d0d] text-[#FFF8EC]">
+			<div className="mx-auto max-w-7xl px-5 py-6">
+				<div className="flex flex-col items-center gap-3 text-center">
+					<p className="text-xs uppercase tracking-[0.2em] text-[#FFF8EC]/70">
+						Mar Mikhael, Beirut &middot; 12pm&ndash;12am &middot; +961 3 286 626
+					</p>
 
-					<div className="flex items-center gap-6 text-sm">
+					<div className="flex items-center gap-5 text-xs">
 						<a
-							href="https://instagram.com/bunmanburgers"
+							href="https://www.instagram.com/bunmanburgers"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="text-white/70 hover:text-white hover:underline"
+							className="text-[#FFF8EC]/50 hover:text-[#FFF8EC] hover:underline"
 						>
-							@bunmanburgers
+							Instagram
 						</a>
 						<a
-							href="https://maps.google.com/?q=Bunman+Burgers+Mar+Mikhael+Beirut"
+							href="https://maps.app.goo.gl/iEjWMc5LqsenitaW8"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="text-white/70 hover:text-white hover:underline"
+							className="text-[#FFF8EC]/50 hover:text-[#FFF8EC] hover:underline"
 						>
-							Google Maps
-						</a>
-						<a href="tel:+9613286626" className="text-white/70 hover:text-white hover:underline">
-							+961 3 286 626
+							Maps
 						</a>
 					</div>
 
-					<p className="text-xs text-white/40">Great burgers. Bad tantrums. No returns.</p>
-
-					<p className="text-xs text-white/40">Bunman Burgers 2025 &copy;</p>
+					<p className="text-[10px] uppercase tracking-[0.15em] text-[#FFF8EC]/30">
+						Great burgers. Bad tantrums.
+					</p>
 				</div>
 			</div>
 		</footer>

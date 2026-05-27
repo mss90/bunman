@@ -155,8 +155,8 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 												key={mod.id}
 												className={`flex cursor-pointer items-center gap-3 rounded-xl px-4 py-3.5 transition-all duration-200 select-none ${
 													checked
-														? "bg-black text-white"
-														: "bg-[#f5f5f5] text-ink hover:bg-[#ebebeb]"
+														? "bg-[#0d0d0d] text-[#FFF8EC]"
+														: "bg-[#F5ECD6] text-[#0d0d0d] hover:bg-[#ede4c8]"
 												}`}
 											>
 												<input
@@ -197,7 +197,7 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 							<h3 className="text-sm font-semibold uppercase tracking-wider text-ink">
 								{t("qty")}
 							</h3>
-							<div className="mt-3 inline-flex items-center rounded-full bg-[#f5f5f5]">
+							<div className="mt-3 inline-flex items-center rounded-full bg-[#F5ECD6]">
 								<button
 									type="button"
 									onClick={() => setQty((q) => Math.max(1, q - 1))}
@@ -224,7 +224,7 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 						<button
 							type="button"
 							onClick={handleAdd}
-							className="w-full rounded-xl bg-black py-4 text-base font-semibold text-white transition-opacity duration-200 hover:opacity-80"
+							className="w-full rounded-xl bg-[#0d0d0d] py-4 text-base font-semibold text-white transition-opacity duration-200 hover:opacity-80"
 						>
 							{t("addToBun")} &middot; <span className="num">{formatUsd(totalUsd)}</span>
 						</button>

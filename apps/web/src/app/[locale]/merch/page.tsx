@@ -17,8 +17,10 @@ const PRODUCTS = [
 
 export default function MerchPage() {
 	return (
-		<section className="mx-auto max-w-2xl px-5 py-16">
-			<h1 className="font-display text-center text-4xl uppercase tracking-wide text-ink">MERCH</h1>
+		<section className="mx-auto max-w-2xl bg-[#FFF8EC] px-5 py-16">
+			<h1 className="font-display text-center text-4xl uppercase tracking-wide text-[#0d0d0d]">
+				MERCH
+			</h1>
 
 			{/* Product cards */}
 			<div className="mt-10 grid gap-6 sm:grid-cols-2">
@@ -27,8 +29,15 @@ export default function MerchPage() {
 						key={product.name}
 						className="relative overflow-hidden rounded-2xl bg-white shadow-sm"
 					>
+						{/* Coming soon badge */}
+						<div className="absolute top-3 right-3 z-10">
+							<span className="inline-block rounded-full bg-[#0d0d0d]/80 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#FFF8EC]">
+								Coming soon
+							</span>
+						</div>
+
 						{/* Product image */}
-						<div className="relative aspect-square bg-[#f5f5f5]">
+						<div className="relative aspect-square bg-[#F5ECD6]">
 							<Image
 								src={product.image}
 								alt={product.name}
@@ -40,17 +49,9 @@ export default function MerchPage() {
 
 						{/* Info */}
 						<div className="p-5">
-							<h2 className="text-base font-semibold text-ink">{product.name}</h2>
-							<p className="mt-1 text-sm text-black/50">{product.description}</p>
-							<p className="mt-2 text-lg font-semibold text-ink">{product.price}</p>
-							<p className="mt-1 text-xs text-black/40">Cash on delivery &middot; 2-4 days</p>
-
-							{/* Coming soon badge */}
-							<div className="mt-4">
-								<span className="inline-block rounded-full bg-black/5 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-black/40">
-									Coming soon
-								</span>
-							</div>
+							<h2 className="text-base font-semibold text-[#0d0d0d]">{product.name}</h2>
+							<p className="mt-1 text-sm text-[#0d0d0d]/50">{product.description}</p>
+							<p className="mt-2 text-lg font-semibold text-[#0d0d0d]">{product.price}</p>
 						</div>
 					</div>
 				))}
