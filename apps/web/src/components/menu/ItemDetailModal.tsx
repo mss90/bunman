@@ -302,7 +302,7 @@ export function ItemDetailModal({ item, onClose }: ItemDetailModalProps) {
 														key={mod.id}
 														className={`flex cursor-pointer items-center gap-3 rounded-xl px-4 py-3.5 transition-all duration-200 select-none ${
 															checked
-																? "bg-[#3d5a3a] text-white"
+																? "bg-[#2C3E2D] text-white"
 																: "bg-[#F5ECD6] text-[#0d0d0d] hover:bg-[#ede4c8]"
 														}`}
 													>
@@ -327,7 +327,7 @@ export function ItemDetailModal({ item, onClose }: ItemDetailModalProps) {
 																	height="12"
 																	viewBox="0 0 12 12"
 																	fill="none"
-																	stroke="#3d5a3a"
+																	stroke="#2C3E2D"
 																	strokeWidth="2"
 																	strokeLinecap="round"
 																	strokeLinejoin="round"
@@ -406,7 +406,7 @@ export function ItemDetailModal({ item, onClose }: ItemDetailModalProps) {
 							<button
 								type="button"
 								onClick={handleAdd}
-								className="w-full rounded-xl bg-[#3d5a3a] py-4 text-base font-semibold text-white transition-opacity duration-200 hover:opacity-90"
+								className="w-full rounded-xl bg-[#2C3E2D] py-4 text-base font-semibold text-white transition-opacity duration-200 hover:opacity-90"
 							>
 								Add to bag &mdash; {formatUsd(totalUsd)}
 							</button>

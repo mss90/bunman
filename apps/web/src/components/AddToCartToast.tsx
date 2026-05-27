@@ -28,7 +28,7 @@ export function AddToCartToast() {
 	return (
 		<div className="fixed bottom-24 left-1/2 z-[10000] -translate-x-1/2">
 			<div
-				className={`flex items-center gap-2 rounded-full bg-[#3d5a3a] px-6 py-3 shadow-lg transition-all duration-300 ${
+				className={`flex items-center gap-2 rounded-full bg-[#2C3E2D] px-6 py-3 shadow-lg transition-all duration-300 ${
 					animateIn ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
 				}`}
 			>

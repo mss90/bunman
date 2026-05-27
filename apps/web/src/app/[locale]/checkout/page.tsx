@@ -1,10 +1,11 @@
 "use client";
 
-import { Link, useRouter } from "@/i18n/navigation";
 import { modKey, useCartStore } from "@/lib/cartStore";
 import { formatLbp, formatUsd } from "@/lib/formatPrice";
 import { recentOrders } from "@/lib/recentOrders";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 /* ------------------------------------------------------------------ */
@@ -145,7 +146,7 @@ export default function CheckoutPage() {
 				});
 
 				clearCart();
-				router.push(`/order/${shortId}?placed=1`);
+				router.push(`/en/order/${shortId}?placed=1`);
 			} catch (err) {
 				const msg = err instanceof Error ? err.message : "";
 				if (msg === "Failed to fetch" || msg === "Load failed") {
@@ -183,7 +184,7 @@ export default function CheckoutPage() {
 			<section className="mx-auto flex max-w-7xl flex-col items-center px-5 py-24">
 				<p className="caps text-ink-soft">{t("emptyCart")}</p>
 				<Link
-					href="/menu"
+					href="/en/menu"
 					className="caps mt-4 text-ink underline underline-offset-2 hover:opacity-70"
 				>
 					{t("goMenu")}
@@ -268,7 +269,7 @@ export default function CheckoutPage() {
 								}}
 								className={`flex flex-col items-center gap-1 rounded-xl border-2 px-4 py-5 text-center transition-colors ${
 									orderType === "pickup"
-										? "border-[#3d5a3a] bg-[#3d5a3a] text-white"
+										? "border-[#2C3E2D] bg-[#2C3E2D] text-white"
 										: "border-black/10 bg-white text-ink hover:bg-black/5"
 								}`}
 							>
@@ -280,7 +281,7 @@ export default function CheckoutPage() {
 								onClick={() => setOrderType("delivery")}
 								className={`flex flex-col items-center gap-1 rounded-xl border-2 px-4 py-5 text-center transition-colors ${
 									orderType === "delivery"
-										? "border-[#3d5a3a] bg-[#3d5a3a] text-white"
+										? "border-[#2C3E2D] bg-[#2C3E2D] text-white"
 										: "border-black/10 bg-white text-ink hover:bg-black/5"
 								}`}
 							>
@@ -342,7 +343,7 @@ export default function CheckoutPage() {
 										opt.disabled
 											? "cursor-not-allowed border-rule bg-paper-2 text-ink-soft/30"
 											: paymentMethod === opt.value
-												? "border-[#3d5a3a] bg-[#3d5a3a] text-white"
+												? "border-[#2C3E2D] bg-[#2C3E2D] text-white"
 												: "border-black/10 bg-white text-ink hover:bg-black/5"
 									}`}
 								>
@@ -445,7 +446,7 @@ export default function CheckoutPage() {
 
 						{/* API down message */}
 						{apiDown && (
-							<div className="mt-4 rounded-lg border border-[#3d5a3a]/30 bg-[#3d5a3a]/5 px-4 py-3 text-sm text-ink">
+							<div className="mt-4 rounded-lg border border-[#2C3E2D]/30 bg-[#2C3E2D]/5 px-4 py-3 text-sm text-ink">
 								Ordering is temporarily unavailable. Please try again or call us at{" "}
 								<a href="tel:+9613286626" className="font-semibold underline">
 									+961 3 286 626
@@ -464,7 +465,7 @@ export default function CheckoutPage() {
 						<button
 							type="submit"
 							disabled={!formValid || submitting || apiDown}
-							className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-[#3d5a3a] py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
+							className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-[#2C3E2D] py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
 						>
 							{submitting && (
 								<svg

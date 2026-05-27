@@ -1,7 +1,7 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const quickMenu = [
@@ -60,7 +60,7 @@ export default function HomePage() {
 				</div>
 
 				<Link
-					href="/menu"
+					href="/en/menu"
 					className="mt-10 rounded-full bg-[#0d0d0d] px-12 py-4 text-sm uppercase tracking-widest text-[#FFF8EC] transition-opacity hover:opacity-80"
 				>
 					ORDER NOW
@@ -73,7 +73,7 @@ export default function HomePage() {
 					{quickMenu.map((item) => (
 						<Link
 							key={item.name}
-							href="/menu"
+							href="/en/menu"
 							className="group flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md"
 							style={{ width: "min(72vw, 280px)" }}
 						>

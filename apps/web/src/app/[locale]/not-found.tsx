@@ -1,4 +1,4 @@
-import { Link } from "@/i18n/navigation";
+import Link from "next/link";
 
 export default function NotFoundPage() {
 	return (
@@ -8,13 +8,13 @@ export default function NotFoundPage() {
 
 			<div className="mt-10 flex gap-6">
 				<Link
-					href="/"
+					href="/en"
 					className="rounded-full bg-[#0d0d0d] px-6 py-3 text-sm font-semibold text-[#FFF8EC] transition-opacity hover:opacity-80"
 				>
 					Go home
 				</Link>
 				<Link
-					href="/menu"
+					href="/en/menu"
 					className="rounded-full border border-[#0d0d0d]/20 px-6 py-3 text-sm font-semibold text-[#0d0d0d] transition-opacity hover:opacity-70"
 				>
 					View menu

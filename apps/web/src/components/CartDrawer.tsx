@@ -1,10 +1,10 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
 import { modKey, useCartStore } from "@/lib/cartStore";
 import { formatUsd } from "@/lib/formatPrice";
 import { Drawer } from "@bunman/ui";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 interface CartDrawerProps {
 	open: boolean;
@@ -49,9 +49,9 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 						<p className="mt-1 text-sm text-[#0d0d0d]/40">Add items from the menu to get started</p>
 					</div>
 					<Link
-						href="/menu"
+						href="/en/menu"
 						onClick={onClose}
-						className="mt-2 inline-block rounded-full bg-[#3d5a3a] px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#3d5a3a]/80"
+						className="mt-2 inline-block rounded-full bg-[#2C3E2D] px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2C3E2D]/80"
 					>
 						Browse menu
 					</Link>
@@ -148,9 +148,9 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 
 						{/* Checkout button */}
 						<Link
-							href="/checkout"
+							href="/en/checkout"
 							onClick={onClose}
-							className="mt-4 block w-full rounded-xl bg-[#3d5a3a] py-4 text-center text-sm font-semibold text-white transition-colors hover:bg-[#3d5a3a]/85"
+							className="mt-4 block w-full rounded-xl bg-[#2C3E2D] py-4 text-center text-sm font-semibold text-white transition-colors hover:bg-[#2C3E2D]/85"
 						>
 							{t("checkout")}
 						</Link>

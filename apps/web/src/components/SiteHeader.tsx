@@ -1,18 +1,20 @@
 "use client";
 
-import { Link, usePathname } from "@/i18n/navigation";
 import { useCartStore } from "@/lib/cartStore";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CartDrawer } from "./CartDrawer";
 
 const NAV_LINKS = [
-	{ href: "/", labelKey: "home" },
-	{ href: "/menu", labelKey: "menu" },
-	{ href: "/orders", labelKey: "orders" },
-	{ href: "/merch", labelKey: "merch" },
-	{ href: "/about", labelKey: "about" },
-	{ href: "/contact", labelKey: "contact" },
+	{ href: "/en", labelKey: "home" },
+	{ href: "/en/menu", labelKey: "menu" },
+	{ href: "/en/orders", labelKey: "orders" },
+	{ href: "/en/merch", labelKey: "merch" },
+	{ href: "/en/about", labelKey: "about" },
+	{ href: "/en/contact", labelKey: "contact" },
 ] as const;
 
 export function SiteHeader() {
@@ -45,7 +47,7 @@ export function SiteHeader() {
 	}, [mobileMenuOpen]);
 
 	function isActive(href: string) {
-		if (href === "/") return pathname === "/" || pathname === "";
+		if (href === "/en") return pathname === "/en" || pathname === "/en/";
 		return pathname.startsWith(href);
 	}
 
@@ -54,8 +56,8 @@ export function SiteHeader() {
 			<header className="sticky top-0 z-40 bg-[#FFF8EC] shadow-sm">
 				<div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5">
 					{/* Logo */}
-					<Link href="/" className="flex-shrink-0">
-						<img src="/logo.png" alt="BUNMAN" className="h-8" />
+					<Link href="/en" className="flex-shrink-0">
+						<Image src="/logo.png" alt="BUNMAN" width={120} height={40} className="h-8 w-auto" />
 					</Link>
 
 					{/* Desktop nav -- centered */}

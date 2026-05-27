@@ -1,9 +1,9 @@
 "use client";
 
-import { Link } from "@/i18n/navigation";
 import { formatUsd } from "@/lib/formatPrice";
 import { type RecentOrder, recentOrders } from "@/lib/recentOrders";
 import { StatusPill } from "@bunman/ui";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function OrdersHistoryPage() {
@@ -56,7 +56,7 @@ export default function OrdersHistoryPage() {
 						<p className="mt-1 text-sm text-black/40">Your order history will appear here</p>
 					</div>
 					<Link
-						href="/menu"
+						href="/en/menu"
 						className="mt-2 rounded-full bg-black px-8 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-80"
 					>
 						Start ordering
@@ -68,7 +68,7 @@ export default function OrdersHistoryPage() {
 						{orders.map((order) => (
 							<Link
 								key={order.shortId}
-								href={`/order/${order.shortId}`}
+								href={`/en/order/${order.shortId}`}
 								className="flex items-center justify-between rounded-2xl bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
 							>
 								<div>
