@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { OrderStatus, OrderType, PaymentMethod, PaymentStatus } from "./enums.js";
+import { OrderStatus, OrderType, PaymentMethod, PaymentStatus } from "./enums";
 
 export const CreateOrderItemSchema = z.object({
 	menuItemId: z.string().uuid(),

@@ -1,9 +1,9 @@
-import { Angry } from "./poses/Angry.js";
-import { Empty } from "./poses/Empty.js";
-import { Idle } from "./poses/Idle.js";
-import { Proud } from "./poses/Proud.js";
-import { Sleeping } from "./poses/Sleeping.js";
-import { Smashing } from "./poses/Smashing.js";
+import { Angry } from "./poses/Angry";
+import { Empty } from "./poses/Empty";
+import { Idle } from "./poses/Idle";
+import { Proud } from "./poses/Proud";
+import { Sleeping } from "./poses/Sleeping";
+import { Smashing } from "./poses/Smashing";
 
 export type BunmanPose = "idle" | "smashing" | "angry" | "proud" | "sleeping" | "empty";
 

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { MerchOrderStatus } from "./enums.js";
+import { MerchOrderStatus } from "./enums";
 
 export const MerchSizeSchema = z.object({
 	label: z.string(),

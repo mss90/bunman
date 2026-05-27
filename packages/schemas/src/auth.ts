@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { AppTarget } from "./enums.js";
+import { AppTarget } from "./enums";
 
 export const MagicLinkRequestSchema = z.object({
 	email: z.string().email(),

@@ -1,7 +1,7 @@
-export { Button } from "./Button.js";
-export { Caps } from "./Caps.js";
-export { Drawer } from "./Drawer.js";
-export { Field } from "./Field.js";
-export { RadioCard } from "./RadioCard.js";
-export { StatusPill } from "./StatusPill.js";
-export { Hairline } from "./Hairline.js";
+export { Button } from "./Button";
+export { Caps } from "./Caps";
+export { Drawer } from "./Drawer";
+export { Field } from "./Field";
+export { RadioCard } from "./RadioCard";
+export { StatusPill } from "./StatusPill";
+export { Hairline } from "./Hairline";
