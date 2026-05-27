@@ -1,38 +1,26 @@
 "use client";
 
 import { Bunman } from "@bunman/mascot";
-import { useEffect, useState } from "react";
 import "@bunman/mascot/animations.css";
 import { Link } from "@/i18n/navigation";
 import { formatUsd } from "@/lib/formatPrice";
+import { type RecentOrder, recentOrders } from "@/lib/recentOrders";
 import { StatusPill } from "@bunman/ui";
-
-interface RecentOrder {
-	shortId: string;
-	status: string;
-	totalUsd: string;
-	placedAt: string;
-	type: string;
-}
+import { useEffect, useState } from "react";
 
 export default function OrdersHistoryPage() {
 	const [orders, setOrders] = useState<RecentOrder[]>([]);
 	const [loaded, setLoaded] = useState(false);
 
 	useEffect(() => {
-		try {
-			const stored = localStorage.getItem("bunman-recent-orders");
-			if (stored) {
-				setOrders(JSON.parse(stored) as RecentOrder[]);
-			}
-		} catch {
-			/* empty */
-		}
-		setLoaded(true);
+		recentOrders
+			.list()
+			.then(setOrders)
+			.finally(() => setLoaded(true));
 	}, []);
 
-	const clearHistory = () => {
-		localStorage.removeItem("bunman-recent-orders");
+	const clearHistory = async () => {
+		await recentOrders.clear();
 		setOrders([]);
 	};
 

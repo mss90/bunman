@@ -3,6 +3,7 @@
 import { Link, useRouter } from "@/i18n/navigation";
 import { modKey, useCartStore } from "@/lib/cartStore";
 import { formatLbp, formatUsd } from "@/lib/formatPrice";
+import { recentOrders } from "@/lib/recentOrders";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -130,6 +131,15 @@ export default function CheckoutPage() {
 				const data = await res.json();
 				const shortId = data?.order?.shortId;
 
+				await recentOrders.add({
+					shortId,
+					status: "received",
+					totalUsd: totalUsd.toFixed(2),
+					placedAt: new Date().toISOString(),
+					type: orderType,
+					customerName: name.trim(),
+				});
+
 				clearCart();
 				router.push(`/order/${shortId}?placed=1`);
 			} catch (err) {
@@ -152,6 +162,7 @@ export default function CheckoutPage() {
 			clearCart,
 			router,
 			t,
+			totalUsd,
 		],
 	);
 
