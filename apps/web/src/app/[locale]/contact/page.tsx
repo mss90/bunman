@@ -1,48 +1,56 @@
 export default function ContactPage() {
 	return (
-		<section className="mx-auto max-w-7xl px-5 py-16">
-			<p className="caps text-meat">find us.</p>
-			<h1 className="font-display mt-2 text-5xl text-ink">Mar Mikhael, Beirut</h1>
+		<section className="mx-auto max-w-[700px] px-5 py-24">
+			<h1 className="font-display text-[clamp(2.5rem,6vw,5rem)] uppercase leading-[0.95] text-ink">
+				find us.
+			</h1>
 
-			<div className="mt-10 grid gap-10 md:grid-cols-2">
-				<div className="space-y-6">
-					<div>
-						<p className="caps text-ink">Address</p>
-						<p className="mt-1 text-ink-soft">Mar Mikhael, Beirut, Lebanon</p>
-					</div>
-					<div>
-						<p className="caps text-ink">Hours</p>
-						<p className="mt-1 text-ink-soft">Open 7/7 — 12pm to midnight</p>
-					</div>
-					<div>
-						<p className="caps text-ink">Phone</p>
-						<p className="mt-1 text-ink-soft">+961 1 000 000</p>
-					</div>
-					<div>
-						<p className="caps text-ink">Instagram</p>
-						<a
-							href="https://instagram.com/bunman"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="mt-1 inline-block text-meat hover:text-meat-deep"
-						>
-							@bunman
-						</a>
-					</div>
+			<div className="mt-12 space-y-10">
+				<div>
+					<p className="caps text-ink">Location</p>
+					<p className="mt-2 text-lg text-ink-soft">Mar Mikhael, Beirut</p>
 					<a
-						href="https://wa.me/9611000000"
+						href="https://maps.app.goo.gl/iEjWMc5LqsenitaW8"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="mt-4 inline-block rounded-full bg-pickle px-6 py-3 text-sm font-semibold text-paper transition-colors hover:bg-pickle/80"
+						className="mt-1 inline-block border-b border-ink text-sm text-ink transition-opacity hover:opacity-50"
 					>
-						WhatsApp us
+						Open in Google Maps
 					</a>
 				</div>
-				<div className="flex h-72 items-center justify-center rounded-xl bg-paper-2 text-ink-soft">
-					<div className="text-center">
-						<p className="font-display text-2xl text-ink/20">Map</p>
-						<p className="caps mt-2 text-ink-soft/40">33.8985° N, 35.5188° E</p>
-					</div>
+
+				<div>
+					<p className="caps text-ink">Hours</p>
+					<p className="mt-2 text-lg text-ink-soft">Open 7/7 — 12pm to 12am</p>
+				</div>
+
+				<div>
+					<p className="caps text-ink">Phone</p>
+					<a
+						href="tel:+9613286626"
+						className="mt-2 inline-block text-lg text-ink-soft transition-opacity hover:opacity-50"
+					>
+						+961 3 286 626 (03-BUNMAN)
+					</a>
+				</div>
+
+				<div>
+					<p className="caps text-ink">Instagram</p>
+					<a
+						href="https://www.instagram.com/bunmanburgers"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="mt-2 inline-block border-b border-ink text-lg text-ink transition-opacity hover:opacity-50"
+					>
+						@bunmanburgers
+					</a>
+				</div>
+
+				<div className="border-t border-rule pt-10">
+					<p className="caps text-ink">Return Policy</p>
+					<p className="mt-2 text-lg text-ink-soft">
+						Bunman doesn&apos;t do refunds. Or apologies. Or second chances.
+					</p>
 				</div>
 			</div>
 		</section>

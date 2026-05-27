@@ -152,7 +152,7 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 											<label
 												key={mod.id}
 												className={`flex cursor-pointer items-center gap-3 rounded-lg border-2 px-4 py-3 transition-colors duration-[var(--dur-fast)] select-none ${
-													checked ? "border-meat bg-meat/5" : "border-rule"
+													checked ? "border-ink bg-ink/5" : "border-rule"
 												}`}
 											>
 												<input
@@ -166,7 +166,7 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 												<span
 													className={`flex h-5 w-5 shrink-0 items-center justify-center border-2 transition-colors ${
 														isRadio ? "rounded-full" : "rounded-[4px]"
-													} ${checked ? "border-meat bg-meat" : "border-rule"}`}
+													} ${checked ? "border-ink bg-ink" : "border-rule"}`}
 												>
 													{checked && <CheckIcon />}
 												</span>
@@ -187,11 +187,11 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 						{/* Quantity stepper */}
 						<div className="mt-4">
 							<h3 className="caps text-ink">{t("qty")}</h3>
-							<div className="mt-3 inline-flex items-center rounded-full border-2 border-rule">
+							<div className="mt-3 inline-flex items-center rounded-full border-2 border-ink">
 								<button
 									type="button"
 									onClick={() => setQty((q) => Math.max(1, q - 1))}
-									className="flex h-10 w-10 items-center justify-center text-lg font-semibold text-ink transition-colors hover:text-meat disabled:opacity-30"
+									className="flex h-10 w-10 items-center justify-center text-lg font-semibold text-ink transition-opacity hover:opacity-70 disabled:opacity-30"
 									disabled={qty <= 1}
 								>
 									&minus;
@@ -200,7 +200,7 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 								<button
 									type="button"
 									onClick={() => setQty((q) => Math.min(20, q + 1))}
-									className="flex h-10 w-10 items-center justify-center text-lg font-semibold text-ink transition-colors hover:text-meat disabled:opacity-30"
+									className="flex h-10 w-10 items-center justify-center text-lg font-semibold text-ink transition-opacity hover:opacity-70 disabled:opacity-30"
 									disabled={qty >= 20}
 								>
 									+
@@ -214,7 +214,7 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 						<button
 							type="button"
 							onClick={handleAdd}
-							className="w-full rounded-full bg-meat py-3.5 text-sm font-semibold text-paper transition-colors duration-[var(--dur-fast)] hover:bg-meat-deep"
+							className="w-full rounded-full bg-ink py-3.5 text-sm font-semibold text-paper transition-opacity duration-[var(--dur-fast)] hover:opacity-80"
 						>
 							{t("addToBun")} &middot; <span className="num">{formatUsd(totalUsd)}</span>
 						</button>

@@ -171,7 +171,10 @@ export default function CheckoutPage() {
 		return (
 			<section className="mx-auto flex max-w-7xl flex-col items-center px-5 py-24">
 				<p className="caps text-ink-soft">{t("emptyCart")}</p>
-				<Link href="/menu" className="caps mt-4 text-meat hover:text-meat-deep">
+				<Link
+					href="/menu"
+					className="caps mt-4 text-ink underline underline-offset-2 hover:opacity-70"
+				>
 					{t("goMenu")}
 				</Link>
 			</section>
@@ -181,7 +184,7 @@ export default function CheckoutPage() {
 	/* ── Render ──────────────────────────────────────────────────── */
 	return (
 		<section className="mx-auto max-w-7xl px-5 py-12">
-			<p className="caps text-meat">{t("eyebrow")}</p>
+			<p className="caps text-ink-soft">{t("eyebrow")}</p>
 
 			<form onSubmit={handleSubmit} className="mt-8 grid gap-10 lg:grid-cols-12 lg:gap-12">
 				{/* ════════════════ LEFT — FORM ════════════════ */}
@@ -202,7 +205,7 @@ export default function CheckoutPage() {
 									placeholder={t("namePlaceholder")}
 									value={name}
 									onChange={(e) => setName(e.target.value)}
-									className="w-full rounded-xl border border-rule bg-paper-2 px-4 py-3 text-sm text-ink placeholder:text-ink-soft/40 focus:border-meat focus:outline-none focus:ring-1 focus:ring-meat"
+									className="w-full rounded-xl border border-rule bg-paper-2 px-4 py-3 text-sm text-ink placeholder:text-ink-soft/40 focus:border-ink focus:outline-none focus:ring-1 focus:ring-ink"
 								/>
 							</div>
 
@@ -221,7 +224,7 @@ export default function CheckoutPage() {
 									placeholder={t("phonePlaceholder")}
 									value={phone}
 									onChange={(e) => setPhone(e.target.value)}
-									className="w-full rounded-xl border border-rule bg-paper-2 py-3 pl-14 pr-4 text-sm text-ink placeholder:text-ink-soft/40 focus:border-meat focus:outline-none focus:ring-1 focus:ring-meat"
+									className="w-full rounded-xl border border-rule bg-paper-2 py-3 pl-14 pr-4 text-sm text-ink placeholder:text-ink-soft/40 focus:border-ink focus:outline-none focus:ring-1 focus:ring-ink"
 								/>
 							</div>
 
@@ -236,7 +239,7 @@ export default function CheckoutPage() {
 									placeholder={t("emailPlaceholder")}
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
-									className="w-full rounded-xl border border-rule bg-paper-2 px-4 py-3 text-sm text-ink placeholder:text-ink-soft/40 focus:border-meat focus:outline-none focus:ring-1 focus:ring-meat"
+									className="w-full rounded-xl border border-rule bg-paper-2 px-4 py-3 text-sm text-ink placeholder:text-ink-soft/40 focus:border-ink focus:outline-none focus:ring-1 focus:ring-ink"
 								/>
 							</div>
 						</div>
@@ -254,8 +257,8 @@ export default function CheckoutPage() {
 								}}
 								className={`flex flex-col items-center gap-1 rounded-xl border-2 px-4 py-5 text-center transition-colors ${
 									orderType === "pickup"
-										? "border-meat bg-meat/5 text-meat"
-										: "border-rule bg-paper-2 text-ink-soft hover:border-ink/20"
+										? "border-ink bg-ink text-paper"
+										: "border-ink bg-paper text-ink hover:bg-ink/5"
 								}`}
 							>
 								<span className="text-2xl">🏃</span>
@@ -267,8 +270,8 @@ export default function CheckoutPage() {
 								onClick={() => setOrderType("delivery")}
 								className={`flex flex-col items-center gap-1 rounded-xl border-2 px-4 py-5 text-center transition-colors ${
 									orderType === "delivery"
-										? "border-meat bg-meat/5 text-meat"
-										: "border-rule bg-paper-2 text-ink-soft hover:border-ink/20"
+										? "border-ink bg-ink text-paper"
+										: "border-ink bg-paper text-ink hover:bg-ink/5"
 								}`}
 							>
 								<span className="text-2xl">🛵</span>
@@ -288,7 +291,7 @@ export default function CheckoutPage() {
 									required
 									value={selectedZoneId}
 									onChange={(e) => setSelectedZoneId(e.target.value)}
-									className="w-full rounded-xl border border-rule bg-paper-2 px-4 py-3 text-sm text-ink focus:border-meat focus:outline-none focus:ring-1 focus:ring-meat"
+									className="w-full rounded-xl border border-rule bg-paper-2 px-4 py-3 text-sm text-ink focus:border-ink focus:outline-none focus:ring-1 focus:ring-ink"
 								>
 									<option value="">{t("selectZone")}</option>
 									{zones.map((z) => (
@@ -330,8 +333,8 @@ export default function CheckoutPage() {
 										opt.disabled
 											? "cursor-not-allowed border-rule bg-paper-2 text-ink-soft/30"
 											: paymentMethod === opt.value
-												? "border-meat bg-meat/5 text-meat"
-												: "border-rule bg-paper-2 text-ink-soft hover:border-ink/20"
+												? "border-ink bg-ink text-paper"
+												: "border-ink bg-paper text-ink hover:bg-ink/5"
 									}`}
 								>
 									<span className="text-xl">{opt.icon}</span>
@@ -363,7 +366,7 @@ export default function CheckoutPage() {
 								placeholder={t("notesPlaceholder")}
 								value={notes}
 								onChange={(e) => setNotes(e.target.value)}
-								className="w-full resize-none rounded-xl border border-rule bg-paper-2 px-4 py-3 text-sm text-ink placeholder:text-ink-soft/40 focus:border-meat focus:outline-none focus:ring-1 focus:ring-meat"
+								className="w-full resize-none rounded-xl border border-rule bg-paper-2 px-4 py-3 text-sm text-ink placeholder:text-ink-soft/40 focus:border-ink focus:outline-none focus:ring-1 focus:ring-ink"
 							/>
 							<span className="caps absolute bottom-3 right-4 text-ink-soft/40">
 								{t("charCount", { count: notes.length })}
@@ -427,21 +430,23 @@ export default function CheckoutPage() {
 						<div className="mt-4 flex items-end justify-between border-t border-rule pt-4">
 							<span className="font-display text-lg text-ink">{t("total")}</span>
 							<div className="text-right">
-								<span className="font-display text-2xl text-meat">{formatUsd(totalUsd)}</span>
+								<span className="font-display text-2xl text-ink">{formatUsd(totalUsd)}</span>
 								<span className="num block text-xs text-ink-soft">{formatLbp(totalUsd)}</span>
 							</div>
 						</div>
 
 						{/* Error */}
 						{error && (
-							<p className="mt-4 rounded-lg bg-meat/10 px-4 py-2 text-sm text-meat">{error}</p>
+							<p className="mt-4 rounded-lg border border-ink bg-ink/5 px-4 py-2 text-sm text-ink">
+								{error}
+							</p>
 						)}
 
 						{/* CTA */}
 						<button
 							type="submit"
 							disabled={!formValid || submitting}
-							className="mt-6 w-full rounded-full bg-meat py-3.5 text-sm font-semibold text-paper transition-colors hover:bg-meat-deep disabled:cursor-not-allowed disabled:opacity-40"
+							className="mt-6 w-full rounded-full bg-ink py-3.5 text-sm font-semibold text-paper transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
 						>
 							{submitting ? t("placing") : t("placeOrder")}
 						</button>
@@ -451,7 +456,7 @@ export default function CheckoutPage() {
 							href="https://wa.me/9611000000"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="mt-3 block text-center text-xs text-ink-soft/60 hover:text-meat"
+							className="mt-3 block text-center text-xs text-ink underline underline-offset-2 hover:opacity-70"
 						>
 							{t("whatsapp")}
 						</a>

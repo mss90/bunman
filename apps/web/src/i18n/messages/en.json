@@ -12,24 +12,11 @@
 		"signIn": "Sign in"
 	},
 	"home": {
-		"eyebrow": "born from a tantrum.",
-		"headline": "smash burgers that hit different.",
-		"body": "We didn't set out to make the best burger in Beirut. We just got angry enough.",
-		"readLegend": "Read the legend",
-		"hours": "Mar Mikhael · open 7/7 12pm–12am",
-		"menuBrieflyHeading": "the menu, briefly.",
-		"menuCard1": "The Classic Smash",
-		"menuCard2": "The Double Down",
-		"menuCard3": "The Angry Bird",
-		"menuCard4": "Loaded Fries",
-		"loreHeading": "the lore.",
-		"loreP1": "Bunman didn't mean to invent the smash burger. He was just having a really bad day. The kind of day where you slam your fist into a ball of beef on a screaming-hot griddle and accidentally create the crispiest, juiciest, most unreasonably delicious burger Beirut has ever tasted.",
-		"loreP2": "He opened a window in Mar Mikhael. Then a counter. Then a kitchen. Word spread the way it does in Beirut — fast, loud, and with opinions. Some said it was the sauce. Some said it was the smash technique. Bunman said nothing. He was too busy being angry and making burgers.",
-		"loreP3": "Today, BUNMAN is open 7 days a week, 12pm to midnight. The menu is short because everything on it is perfect. The portions are honest. The attitude is not.",
+		"headline": "Great Burgers.\nBad Tantrums.",
 		"findUsHeading": "where to find us.",
 		"findUsAddress": "Mar Mikhael, Beirut, Lebanon",
 		"findUsHours": "Open 7/7 — 12pm to 12am",
-		"findUsPhone": "+961 1 234 567"
+		"findUsPhone": "+961 3 286 626"
 	},
 	"menu": {
 		"eyebrow": "the menu.",
@@ -58,9 +45,9 @@
 		"tracking": "your order is on its way."
 	},
 	"error": {
-		"notFound": "this page made bunman mad.",
+		"notFound": "this page doesn't exist.",
 		"goHome": "go home",
-		"goMenu": "go eat"
+		"goMenu": "view menu"
 	},
 	"checkout": {
 		"eyebrow": "checkout.",

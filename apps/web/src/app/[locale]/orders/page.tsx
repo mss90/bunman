@@ -28,7 +28,7 @@ export default function OrdersHistoryPage() {
 
 	return (
 		<section className="mx-auto max-w-7xl px-5 py-16">
-			<p className="caps text-meat">your orders.</p>
+			<p className="caps text-ink-soft">your orders.</p>
 			<h1 className="font-display mt-2 text-5xl text-ink">your tantrum log.</h1>
 
 			{orders.length === 0 ? (
@@ -37,7 +37,7 @@ export default function OrdersHistoryPage() {
 					<p className="caps text-ink-soft">no orders yet.</p>
 					<Link
 						href="/menu"
-						className="rounded-full bg-meat px-6 py-3 text-sm font-semibold text-paper transition-colors hover:bg-meat-deep"
+						className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-opacity hover:opacity-80"
 					>
 						go grab one
 					</Link>
@@ -74,7 +74,7 @@ export default function OrdersHistoryPage() {
 					<button
 						type="button"
 						onClick={clearHistory}
-						className="caps mt-8 text-meat hover:text-meat-deep"
+						className="caps mt-8 text-ink underline underline-offset-2 hover:opacity-70"
 					>
 						Clear history
 					</button>

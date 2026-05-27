@@ -1,12 +1,9 @@
 "use client";
 
-import { Bunman } from "@bunman/mascot";
-import "@bunman/mascot/animations.css";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { useEffect, useRef } from "react";
-
-const MENU_CARDS = ["menuCard1", "menuCard2", "menuCard3", "menuCard4"] as const;
 
 export default function HomePage() {
 	const t = useTranslations("home");
@@ -16,7 +13,6 @@ export default function HomePage() {
 	useEffect(() => {
 		const el = containerRef.current;
 		if (!el) return;
-		// trigger entrance on next frame so the browser has painted the initial state
 		const raf = requestAnimationFrame(() => {
 			el.dataset.entered = "true";
 		});
@@ -25,135 +21,81 @@ export default function HomePage() {
 
 	return (
 		<div ref={containerRef} className="group/enter">
-			{/* ───────────────────── HERO ───────────────────── */}
-			<section className="mx-auto max-w-7xl px-5 py-20">
-				<div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-					{/* LEFT — copy */}
-					<div className="lg:col-span-7">
-						{/* eyebrow */}
-						<p
-							className="
-								caps text-meat
-								translate-y-4 opacity-0
-								transition-all duration-700 ease-[cubic-bezier(0.2,0.7,0.1,1)]
-								delay-[200ms]
-								group-data-[entered=true]/enter:translate-y-0
-								group-data-[entered=true]/enter:opacity-100
-								motion-reduce:!translate-y-0 motion-reduce:!opacity-100
-							"
-						>
-							{t("eyebrow")}
-						</p>
+			{/* ───────────────── HERO ───────────────── */}
+			<section className="flex min-h-[80vh] flex-col items-center justify-center px-5 py-24">
+				<div
+					className="
+						opacity-0 translate-y-4
+						transition-all duration-700 ease-[cubic-bezier(0.2,0.7,0.1,1)]
+						delay-[200ms]
+						group-data-[entered=true]/enter:opacity-100
+						group-data-[entered=true]/enter:translate-y-0
+						motion-reduce:!opacity-100 motion-reduce:!translate-y-0
+					"
+				>
+					<Image
+						src="/hero-burger.gif"
+						alt="Bunman character smashing burgers"
+						width={500}
+						height={500}
+						unoptimized
+						priority
+						className="mx-auto"
+					/>
+				</div>
 
-						{/* headline */}
-						<h1
-							className="
-								font-display mt-4 text-[clamp(3rem,8vw,9rem)] leading-[0.9] text-ink
-								translate-y-6 opacity-0
-								transition-all duration-700 ease-[cubic-bezier(0.2,0.7,0.1,1)]
-								delay-[400ms]
-								group-data-[entered=true]/enter:translate-y-0
-								group-data-[entered=true]/enter:opacity-100
-								motion-reduce:!translate-y-0 motion-reduce:!opacity-100
-							"
-						>
-							{t("headline")}
-						</h1>
+				<h1
+					className="
+						font-display mt-10 text-center text-[clamp(2.5rem,7vw,6rem)] uppercase leading-[0.95] text-ink
+						opacity-0 translate-y-4
+						transition-all duration-700 ease-[cubic-bezier(0.2,0.7,0.1,1)]
+						delay-[500ms]
+						group-data-[entered=true]/enter:opacity-100
+						group-data-[entered=true]/enter:translate-y-0
+						motion-reduce:!opacity-100 motion-reduce:!translate-y-0
+					"
+				>
+					{t("headline")}
+				</h1>
 
-						{/* body + CTAs */}
-						<div
-							className="
-								translate-y-4 opacity-0
-								transition-all duration-700 ease-[cubic-bezier(0.2,0.7,0.1,1)]
-								delay-[800ms]
-								group-data-[entered=true]/enter:translate-y-0
-								group-data-[entered=true]/enter:opacity-100
-								motion-reduce:!translate-y-0 motion-reduce:!opacity-100
-							"
-						>
-							<p className="mt-6 max-w-md text-lg text-ink-soft">{t("body")}</p>
-
-							<div className="mt-8 flex flex-wrap gap-4">
-								<Link
-									href="/menu"
-									className="rounded-full bg-meat px-8 py-3.5 text-sm font-semibold text-paper transition-colors duration-[var(--dur-fast)] hover:bg-meat-deep"
-								>
-									{tc("orderNow")}
-								</Link>
-								<Link
-									href="/about"
-									className="rounded-full border-2 border-ink px-8 py-3.5 text-sm font-semibold text-ink transition-colors duration-[var(--dur-fast)] hover:bg-ink hover:text-paper"
-								>
-									{t("readLegend")}
-								</Link>
-							</div>
-
-							<p className="caps mt-10 text-ink-soft/60">{t("hours")}</p>
-						</div>
-					</div>
-
-					{/* RIGHT — hero composition */}
-					<div
-						className="
-							flex items-center justify-center lg:col-span-5
-							scale-90 opacity-0
-							transition-all duration-700 ease-[cubic-bezier(0.2,0.7,0.1,1)]
-							delay-[400ms]
-							group-data-[entered=true]/enter:scale-100
-							group-data-[entered=true]/enter:opacity-100
-							motion-reduce:!scale-100 motion-reduce:!opacity-100
-						"
+				<div
+					className="
+						mt-10
+						opacity-0 translate-y-4
+						transition-all duration-700 ease-[cubic-bezier(0.2,0.7,0.1,1)]
+						delay-[800ms]
+						group-data-[entered=true]/enter:opacity-100
+						group-data-[entered=true]/enter:translate-y-0
+						motion-reduce:!opacity-100 motion-reduce:!translate-y-0
+					"
+				>
+					<Link
+						href="/menu"
+						className="border-b-2 border-ink pb-1 font-display text-lg uppercase tracking-widest text-ink transition-opacity hover:opacity-50"
 					>
-						<div className="relative flex items-center justify-center">
-							{/* meat-red oval blob */}
-							<div className="absolute h-72 w-60 rounded-[50%] bg-meat/15 lg:h-[26rem] lg:w-[22rem]" />
-							<Bunman pose="idle" size={320} className="relative z-10" />
-						</div>
-					</div>
+						{tc("viewMenu")}
+					</Link>
 				</div>
 			</section>
 
-			{/* ───────────── THE MENU, BRIEFLY ───────────── */}
-			<section className="mx-auto max-w-7xl px-5 py-16">
-				<h2 className="font-display text-4xl text-ink lg:text-5xl">{t("menuBrieflyHeading")}</h2>
-
-				<div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-					{MENU_CARDS.map((key) => (
-						<Link
-							key={key}
-							href="/menu"
-							className="group/card rounded-2xl border border-rule bg-paper-2 p-6 transition-colors duration-[var(--dur-fast)] hover:border-meat/40"
-						>
-							<div className="flex h-32 items-center justify-center rounded-xl bg-meat/10">
-								<span className="font-display text-3xl text-meat/30">BM</span>
-							</div>
-							<p className="mt-4 font-semibold text-ink group-hover/card:text-meat transition-colors duration-[var(--dur-fast)]">
-								{t(key)}
-							</p>
-							<p className="caps mt-1 text-ink-soft/60">{tc("viewMenu")}</p>
-						</Link>
-					))}
-				</div>
+			{/* ───────────── SECOND GIF ───────────── */}
+			<section className="flex flex-col items-center px-5 py-24">
+				<Image
+					src="/hero-burger.gif"
+					alt="Bunman character"
+					width={400}
+					height={400}
+					unoptimized
+					className="mx-auto"
+				/>
 			</section>
 
-			{/* ───────────────── THE LORE ───────────────── */}
-			<section className="mx-auto max-w-7xl px-5 py-16">
-				<h2 className="font-display text-4xl text-ink lg:text-5xl">{t("loreHeading")}</h2>
-
-				<article className="mt-10 max-w-[65ch] space-y-6 text-lg leading-relaxed text-ink-soft">
-					<p className="first-letter:float-left first-letter:mr-3 first-letter:font-display first-letter:text-7xl first-letter:leading-none first-letter:text-meat">
-						{t("loreP1")}
-					</p>
-					<p>{t("loreP2")}</p>
-					<p>{t("loreP3")}</p>
-				</article>
-			</section>
-
-			{/* ──────────── WHERE TO FIND US ──────────── */}
-			<section className="mx-auto max-w-7xl px-5 py-16 pb-24">
-				<h2 className="font-display text-4xl text-ink lg:text-5xl">{t("findUsHeading")}</h2>
-
-				<div className="mt-10 space-y-3 text-lg text-ink-soft">
+			{/* ───────────── LOCATION + HOURS ───────────── */}
+			<section className="mx-auto max-w-xl px-5 py-24 text-center">
+				<h2 className="font-display text-3xl uppercase text-ink lg:text-4xl">
+					{t("findUsHeading")}
+				</h2>
+				<div className="mt-8 space-y-2 text-lg text-ink-soft">
 					<p>{t("findUsAddress")}</p>
 					<p>{t("findUsHours")}</p>
 					<p>{t("findUsPhone")}</p>

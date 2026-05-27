@@ -78,7 +78,7 @@ function Stepper({
 							{i > 0 && (
 								<div
 									className={`h-0.5 flex-1 transition-colors duration-500 ${
-										reached ? "bg-pickle" : "bg-rule"
+										reached ? "bg-ink" : "bg-rule"
 									}`}
 								/>
 							)}
@@ -88,11 +88,11 @@ function Stepper({
 							<div className="relative flex items-center justify-center">
 								<div
 									className={`h-3.5 w-3.5 rounded-full border-2 transition-colors duration-500 ${
-										reached ? "border-pickle bg-pickle" : "border-rule bg-paper"
+										reached ? "border-ink bg-ink" : "border-rule bg-paper"
 									}`}
 								/>
 								{isCurrent && (
-									<span className="absolute inline-flex h-3.5 w-3.5 animate-ping rounded-full bg-pickle opacity-40" />
+									<span className="absolute inline-flex h-3.5 w-3.5 animate-ping rounded-full bg-ink opacity-40" />
 								)}
 							</div>
 
@@ -100,7 +100,7 @@ function Stepper({
 							{i < steps.length - 1 && (
 								<div
 									className={`h-0.5 flex-1 transition-colors duration-500 ${
-										i < currentIndex ? "bg-pickle" : "bg-rule"
+										i < currentIndex ? "bg-ink" : "bg-rule"
 									}`}
 								/>
 							)}
@@ -137,7 +137,7 @@ function CelebrationBanner() {
 	if (!visible) return null;
 
 	return (
-		<div className="mb-6 flex items-center gap-4 rounded-xl border border-pickle/20 bg-pickle/5 px-5 py-4">
+		<div className="mb-6 flex items-center gap-4 rounded-xl border border-ink/20 bg-ink/5 px-5 py-4">
 			<Bunman pose="proud" size={56} />
 			<div>
 				<p className="font-display text-lg text-ink">you smashed it.</p>
@@ -238,7 +238,7 @@ export function OrderTracker({ order, apiUrl, justPlaced }: OrderTrackerProps) {
 
 			{/* Header */}
 			<div className="flex flex-wrap items-center gap-3">
-				<Caps className="text-meat">ORDER #{order.shortId}</Caps>
+				<Caps className="text-ink-soft">ORDER #{order.shortId}</Caps>
 				<StatusPill status={status} />
 			</div>
 
@@ -255,7 +255,7 @@ export function OrderTracker({ order, apiUrl, justPlaced }: OrderTrackerProps) {
 				<div className="flex flex-col items-center justify-center rounded-xl bg-paper-2 py-12">
 					<Bunman pose={pose} size={220} />
 					{status === "cancelled" && (
-						<p className="font-display mt-4 text-xl text-meat">Order cancelled.</p>
+						<p className="font-display mt-4 text-xl text-ink">Order cancelled.</p>
 					)}
 				</div>
 
@@ -312,7 +312,7 @@ export function OrderTracker({ order, apiUrl, justPlaced }: OrderTrackerProps) {
 						)}
 						<div className="flex justify-between border-t border-rule pt-2">
 							<span className="font-display text-lg text-ink">Total</span>
-							<span className="font-display text-lg text-meat">{formatUsd(order.totalUsd)}</span>
+							<span className="font-display text-lg text-ink">{formatUsd(order.totalUsd)}</span>
 						</div>
 					</div>
 
@@ -329,7 +329,7 @@ export function OrderTracker({ order, apiUrl, justPlaced }: OrderTrackerProps) {
 						href={whatsappUrl}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="mt-2 inline-block rounded-full bg-pickle px-6 py-3 text-sm font-semibold text-paper transition-colors hover:bg-pickle/80"
+						className="mt-2 inline-block text-sm font-semibold text-ink underline underline-offset-2 transition-opacity hover:opacity-70"
 					>
 						Text Bunman
 					</a>

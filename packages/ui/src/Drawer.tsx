@@ -47,7 +47,7 @@ export function Drawer({ open, onClose, children, title }: DrawerProps) {
 			{/* Panel */}
 			<dialog
 				open={open || undefined}
-				className={`fixed right-0 top-0 z-50 m-0 flex h-full w-full max-w-md flex-col bg-[#fff8ec] shadow-2xl transition-transform ${
+				className={`fixed right-0 top-0 z-50 m-0 flex h-full w-full max-w-md flex-col bg-white shadow-2xl transition-transform ${
 					open ? "translate-x-0" : "translate-x-full"
 				}`}
 				style={{

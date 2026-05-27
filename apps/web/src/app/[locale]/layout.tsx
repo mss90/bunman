@@ -5,14 +5,14 @@ import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { Bagel_Fat_One, Inter } from "next/font/google";
+import { Inter, Oswald } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import "../globals.css";
 
-const display = Bagel_Fat_One({
+const display = Oswald({
 	subsets: ["latin"],
-	weight: "400",
+	weight: ["400", "500", "600", "700"],
 	variable: "--font-display",
 });
 
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 	description:
 		"Smash burgers born from a tantrum. Order pickup or delivery from Mar Mikhael, Beirut.",
 	manifest: "/manifest.webmanifest",
-	themeColor: "#b62a1a",
+	themeColor: "#1a1a1a",
 	appleWebApp: {
 		capable: true,
 		statusBarStyle: "black-translucent",

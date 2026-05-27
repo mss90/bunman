@@ -2,7 +2,6 @@
 
 import { useCartStore } from "@/lib/cartStore";
 import { formatLbp, formatUsd } from "@/lib/formatPrice";
-import { Hairline } from "@bunman/ui";
 import { useTranslations } from "next-intl";
 import { useCallback, useRef, useState } from "react";
 import { ModifierDrawer } from "./ModifierDrawer";
@@ -117,16 +116,16 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 		<>
 			{/* ---- Hero band ---- */}
 			<section className="mx-auto max-w-7xl px-5 pt-16 pb-8">
-				<p className="caps text-meat">{t("eyebrow")}</p>
+				<p className="caps text-ink-soft">{t("eyebrow")}</p>
 				<h1 className="font-display mt-2 text-5xl text-ink md:text-7xl">{t("headline")}</h1>
 
 				{/* Pickup / Delivery toggle */}
-				<div className="mt-8 inline-flex rounded-full border-2 border-rule p-1">
+				<div className="mt-8 inline-flex rounded-full border-2 border-ink p-1">
 					<button
 						type="button"
 						onClick={() => setMode("pickup")}
 						className={`rounded-full px-6 py-2 text-sm font-semibold transition-colors duration-[var(--dur-fast)] ${
-							mode === "pickup" ? "bg-meat text-paper" : "text-ink-soft hover:text-ink"
+							mode === "pickup" ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"
 						}`}
 					>
 						{t("pickup")}
@@ -135,7 +134,7 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 						type="button"
 						onClick={() => setMode("delivery")}
 						className={`rounded-full px-6 py-2 text-sm font-semibold transition-colors duration-[var(--dur-fast)] ${
-							mode === "delivery" ? "bg-meat text-paper" : "text-ink-soft hover:text-ink"
+							mode === "delivery" ? "bg-ink text-paper" : "text-ink-soft hover:text-ink"
 						}`}
 					>
 						{t("delivery")}
@@ -151,10 +150,10 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 							key={category.id}
 							type="button"
 							onClick={() => scrollTo(category.id)}
-							className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-semibold transition-colors duration-[var(--dur-fast)] ${
+							className={`shrink-0 rounded-full border px-4 py-1.5 text-sm font-semibold transition-colors duration-[var(--dur-fast)] ${
 								activeCategory === category.id
-									? "bg-ink text-paper"
-									: "bg-paper-2 text-ink-soft hover:text-ink"
+									? "border-ink bg-ink text-paper"
+									: "border-ink bg-paper text-ink hover:bg-ink/5"
 							}`}
 						>
 							{category.name}
@@ -173,8 +172,8 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 						}}
 						className="pt-10"
 					>
-						<h2 className="font-display text-3xl text-ink">{category.name}</h2>
-						<Hairline className="mt-3" />
+						<h2 className="font-display text-3xl uppercase text-ink">{category.name}</h2>
+						<div className="mt-3 border-b border-ink" />
 
 						<div className="mt-4 divide-y divide-rule">
 							{catItems.map((item) => (
@@ -216,34 +215,36 @@ function MenuItemRow({
 	const hasModifiers = item.modifierGroups.length > 0;
 
 	return (
-		<div className={`flex items-start gap-4 py-4 ${soldOut ? "opacity-50" : ""}`}>
+		<div
+			className={`flex items-start gap-4 rounded-lg border border-rule bg-white p-4 my-2 ${soldOut ? "opacity-50" : ""}`}
+		>
 			{/* Left: name + description */}
 			<div className="min-w-0 flex-1">
 				<div className="flex items-center gap-2">
 					<span className="font-display text-lg text-ink">{item.name}</span>
-					{soldOut && <span className="caps text-meat">{t("soldOut")}</span>}
+					{soldOut && <span className="text-xs font-semibold text-ink-soft">{t("soldOut")}</span>}
 				</div>
 				{item.description && (
 					<p className="mt-0.5 text-sm text-ink-soft line-clamp-2">{item.description}</p>
 				)}
 
 				{/* Action buttons */}
-				<div className="mt-2 flex gap-2">
+				<div className="mt-2 flex items-center gap-3">
 					<button
 						type="button"
 						disabled={soldOut}
 						onClick={() => onQuickAdd(item)}
-						className="inline-flex h-8 items-center gap-1 rounded-full bg-ink px-4 text-xs font-semibold text-paper transition-colors duration-[var(--dur-fast)] hover:bg-meat disabled:pointer-events-none disabled:opacity-40"
+						className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-ink text-paper transition-opacity duration-[var(--dur-fast)] hover:opacity-80 disabled:pointer-events-none disabled:opacity-40"
+						aria-label={t("quickAdd")}
 					>
 						<PlusIcon />
-						{t("quickAdd")}
 					</button>
 					{hasModifiers && (
 						<button
 							type="button"
 							disabled={soldOut}
 							onClick={() => onCustomize(item)}
-							className="inline-flex h-8 items-center rounded-full border-2 border-rule px-4 text-xs font-semibold text-ink-soft transition-colors duration-[var(--dur-fast)] hover:border-ink hover:text-ink disabled:pointer-events-none disabled:opacity-40"
+							className="text-sm font-semibold text-ink underline underline-offset-2 transition-opacity duration-[var(--dur-fast)] hover:opacity-70 disabled:pointer-events-none disabled:opacity-40"
 						>
 							{t("customize")}
 						</button>
@@ -253,7 +254,7 @@ function MenuItemRow({
 
 			{/* Right: price */}
 			<div className="shrink-0 text-right">
-				<span className="num font-semibold text-ink">{formatUsd(item.basePriceUsd)}</span>
+				<span className="num font-bold text-ink">{formatUsd(item.basePriceUsd)}</span>
 				<span className="num mt-0.5 block text-xs text-ink-soft">
 					{formatLbp(item.basePriceUsd)}
 				</span>

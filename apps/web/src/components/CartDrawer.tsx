@@ -3,7 +3,6 @@
 import { Link } from "@/i18n/navigation";
 import { modKey, useCartStore } from "@/lib/cartStore";
 import { formatLbp, formatUsd } from "@/lib/formatPrice";
-import { Bunman } from "@bunman/mascot";
 import { Drawer } from "@bunman/ui";
 import { useTranslations } from "next-intl";
 
@@ -27,9 +26,12 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 		<Drawer open={open} onClose={onClose} title={t("title")}>
 			{items.length === 0 ? (
 				<div className="flex flex-col items-center justify-center gap-4 px-5 py-16">
-					<Bunman pose="empty" size={140} />
-					<p className="caps text-ink-soft">{t("empty")}</p>
-					<Link href="/menu" onClick={onClose} className="caps text-meat hover:text-meat-deep">
+					<p className="text-lg text-black/50">{t("empty")}</p>
+					<Link
+						href="/menu"
+						onClick={onClose}
+						className="text-sm text-black underline hover:no-underline"
+					>
 						{t("goGrabOne")}
 					</Link>
 				</div>
@@ -43,31 +45,33 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 							const lineTotal = (base + modsTotal) * item.qty;
 
 							return (
-								<div key={key} className="border-b border-rule py-4">
+								<div key={key} className="border-b border-black/10 py-4">
 									<div className="flex items-start justify-between gap-3">
 										<div className="flex-1">
-											<p className="font-semibold text-ink">{item.name}</p>
+											<p className="font-semibold text-black">{item.name}</p>
 											{item.modifiers.length > 0 && (
-												<p className="caps mt-0.5 text-ink-soft/60">
+												<p className="mt-0.5 text-xs text-black/50">
 													{item.modifiers.map((m) => m.name).join(", ")}
 												</p>
 											)}
 										</div>
-										<p className="num font-semibold text-ink">{formatUsd(lineTotal)}</p>
+										<p className="font-semibold text-black">{formatUsd(lineTotal)}</p>
 									</div>
 									<div className="mt-3 flex items-center gap-3">
-										<div className="flex items-center rounded-full border border-rule">
+										<div className="flex items-center rounded-full border border-black/20">
 											<button
 												type="button"
-												className="px-3 py-1 text-sm text-ink-soft hover:text-ink"
+												className="px-3 py-1 text-sm text-black/50 hover:text-black"
 												onClick={() => updateQty(item.menuItemId, key, item.qty - 1)}
 											>
-												−
+												&minus;
 											</button>
-											<span className="num w-8 text-center text-sm font-semibold">{item.qty}</span>
+											<span className="w-8 text-center text-sm font-semibold text-black">
+												{item.qty}
+											</span>
 											<button
 												type="button"
-												className="px-3 py-1 text-sm text-ink-soft hover:text-ink"
+												className="px-3 py-1 text-sm text-black/50 hover:text-black"
 												onClick={() => updateQty(item.menuItemId, key, item.qty + 1)}
 											>
 												+
@@ -75,7 +79,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 										</div>
 										<button
 											type="button"
-											className="text-xs text-meat hover:text-meat-deep"
+											className="text-xs text-black/50 underline hover:text-black"
 											onClick={() => remove(item.menuItemId, key)}
 										>
 											Remove
@@ -87,33 +91,33 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 					</div>
 
 					{/* Totals + CTA */}
-					<div className="border-t border-rule bg-paper px-5 py-4">
-						<div className="flex justify-between text-sm text-ink-soft">
+					<div className="border-t border-black/10 bg-white px-5 py-4">
+						<div className="flex justify-between text-sm text-black/60">
 							<span>Subtotal</span>
-							<span className="num">{formatUsd(subtotal)}</span>
+							<span>{formatUsd(subtotal)}</span>
 						</div>
-						<div className="mt-1 flex justify-between text-sm text-ink-soft">
+						<div className="mt-1 flex justify-between text-sm text-black/60">
 							<span>VAT (11%)</span>
-							<span className="num">{formatUsd(vat)}</span>
+							<span>{formatUsd(vat)}</span>
 						</div>
-						<div className="mt-2 flex justify-between border-t border-rule pt-2">
-							<span className="font-display text-lg text-ink">Total</span>
+						<div className="mt-2 flex justify-between border-t border-black/10 pt-2">
+							<span className="text-lg font-semibold text-black">Total</span>
 							<div className="text-right">
-								<span className="font-display text-lg text-meat">{formatUsd(total)}</span>
-								<span className="num block text-xs text-ink-soft">{formatLbp(total)}</span>
+								<span className="text-lg font-semibold text-black">{formatUsd(total)}</span>
+								<span className="block text-xs text-black/50">{formatLbp(total)}</span>
 							</div>
 						</div>
 						<Link
 							href="/checkout"
 							onClick={onClose}
-							className="mt-4 block w-full rounded-full bg-meat py-3.5 text-center text-sm font-semibold text-paper transition-colors hover:bg-meat-deep"
+							className="mt-4 block w-full bg-black py-3.5 text-center text-sm font-semibold text-white transition-colors hover:bg-black/80"
 						>
 							{t("checkout")}
 						</Link>
 						<button
 							type="button"
 							onClick={clear}
-							className="mt-2 w-full text-center text-xs text-meat hover:text-meat-deep"
+							className="mt-2 w-full text-center text-xs text-black/50 underline hover:text-black"
 						>
 							{t("clearBag")}
 						</button>
