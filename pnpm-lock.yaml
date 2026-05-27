@@ -69,9 +69,15 @@ importers:
 
   apps/web:
     dependencies:
+      '@bunman/mascot':
+        specifier: workspace:*
+        version: link:../../packages/mascot
       '@bunman/schemas':
         specifier: workspace:*
         version: link:../../packages/schemas
+      '@bunman/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@tanstack/react-query':
         specifier: ^5.62.0
         version: 5.100.14(react@19.2.4)
