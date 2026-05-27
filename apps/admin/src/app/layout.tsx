@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Bagel_Fat_One, Inter } from "next/font/google";
+import { Inter, Oswald } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 
-const display = Bagel_Fat_One({
+const display = Oswald({
 	subsets: ["latin"],
-	weight: "400",
+	weight: ["400", "500", "600", "700"],
 	variable: "--font-display",
 });
 
