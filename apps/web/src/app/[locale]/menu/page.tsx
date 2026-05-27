@@ -1,5 +1,4 @@
 import { MenuClient } from "@/components/menu/MenuClient";
-import { api } from "@/lib/api";
 
 interface Modifier {
 	id: string;
@@ -269,20 +268,8 @@ const STATIC_ITEMS: MenuItem[] = [
 	},
 ];
 
-export default async function MenuPage() {
-	let data: MenuResponse | null = null;
-
-	try {
-		data = await api.get<MenuResponse>("/v1/menu");
-	} catch {
-		// API is down -- fall through to static fallback
-	}
-
-	const categories = data
-		? [...data.categories].sort((a, b) => a.displayOrder - b.displayOrder)
-		: STATIC_CATEGORIES;
-
-	const items = data ? data.items.filter((item) => item.isVisible) : STATIC_ITEMS;
-
-	return <MenuClient categories={categories} items={items} />;
+export default function MenuPage() {
+	// TODO(launch): fetch from API when backend is deployed
+	// For demo: use static data for instant page load
+	return <MenuClient categories={STATIC_CATEGORIES} items={STATIC_ITEMS} />;
 }
