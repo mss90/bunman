@@ -134,6 +134,19 @@ importers:
         specifier: ^5.7.3
         version: 5.9.3
 
+  packages/mascot:
+    dependencies:
+      react:
+        specifier: ^19.0.0
+        version: 19.2.4
+    devDependencies:
+      '@types/react':
+        specifier: ^19
+        version: 19.2.15
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
   packages/schemas:
     dependencies:
       zod:
