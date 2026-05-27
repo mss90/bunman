@@ -51,7 +51,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 					<Link
 						href="/menu"
 						onClick={onClose}
-						className="mt-2 inline-block rounded-full bg-[#0d0d0d] px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0d0d0d]/80"
+						className="mt-2 inline-block rounded-full bg-[#3d5a3a] px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#3d5a3a]/80"
 					>
 						Browse menu
 					</Link>
@@ -150,7 +150,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
 						<Link
 							href="/checkout"
 							onClick={onClose}
-							className="mt-4 block w-full rounded-xl bg-[#0d0d0d] py-4 text-center text-sm font-semibold text-white transition-colors hover:bg-[#0d0d0d]/85"
+							className="mt-4 block w-full rounded-xl bg-[#3d5a3a] py-4 text-center text-sm font-semibold text-white transition-colors hover:bg-[#3d5a3a]/85"
 						>
 							{t("checkout")}
 						</Link>

@@ -1,6 +1,6 @@
 export function SiteFooter() {
 	return (
-		<footer className="bg-[#0d0d0d] text-[#FFF8EC]">
+		<footer className="bg-[#3d5a3a] text-[#FFF8EC]">
 			<div className="mx-auto max-w-7xl px-5 py-6">
 				<div className="flex flex-col items-center gap-3 text-center">
 					<p className="text-xs uppercase tracking-[0.2em] text-[#FFF8EC]/70">

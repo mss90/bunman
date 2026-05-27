@@ -1,3 +1,5 @@
+import { AddToCartToast } from "@/components/AddToCartToast";
+import { FloatingCartBar } from "@/components/FloatingCartBar";
 import { InstallPrompt } from "@/components/InstallPrompt";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -56,6 +58,8 @@ export default async function LocaleLayout({
 					<SiteHeader />
 					<main className="flex-1">{children}</main>
 					<SiteFooter />
+					<FloatingCartBar />
+					<AddToCartToast />
 					<InstallPrompt />
 				</NextIntlClientProvider>
 			</body>

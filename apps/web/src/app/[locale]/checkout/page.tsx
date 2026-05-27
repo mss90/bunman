@@ -41,6 +41,8 @@ export default function CheckoutPage() {
 	/* ── Branch (first from /v1/menu) ───────────────────────────── */
 	const [branchId, setBranchId] = useState<string | null>(null);
 
+	const [apiDown, setApiDown] = useState(false);
+
 	useEffect(() => {
 		fetch(`${API_URL}/v1/menu`)
 			.then((r) => r.json())
@@ -48,7 +50,9 @@ export default function CheckoutPage() {
 				const first = data?.branches?.[0];
 				if (first) setBranchId(first.id);
 			})
-			.catch(() => {});
+			.catch(() => {
+				setApiDown(true);
+			});
 	}, []);
 
 	/* ── Delivery zones ──────────────────────────────────────────── */
@@ -143,7 +147,14 @@ export default function CheckoutPage() {
 				clearCart();
 				router.push(`/order/${shortId}?placed=1`);
 			} catch (err) {
-				setError(err instanceof Error ? err.message : t("orderError"));
+				const msg = err instanceof Error ? err.message : "";
+				if (msg === "Failed to fetch" || msg === "Load failed") {
+					setError(
+						"Ordering is temporarily unavailable. Please try again or call us at +961 3 286 626",
+					);
+				} else {
+					setError(msg || t("orderError"));
+				}
 				setSubmitting(false);
 			}
 		},
@@ -257,11 +268,10 @@ export default function CheckoutPage() {
 								}}
 								className={`flex flex-col items-center gap-1 rounded-xl border-2 px-4 py-5 text-center transition-colors ${
 									orderType === "pickup"
-										? "border-ink bg-ink text-paper"
-										: "border-ink bg-paper text-ink hover:bg-ink/5"
+										? "border-[#3d5a3a] bg-[#3d5a3a] text-white"
+										: "border-black/10 bg-white text-ink hover:bg-black/5"
 								}`}
 							>
-								<span className="text-2xl">🏃</span>
 								<span className="text-sm font-semibold">{t("pickup")}</span>
 								<span className="text-xs opacity-60">{t("pickupDesc")}</span>
 							</button>
@@ -270,11 +280,10 @@ export default function CheckoutPage() {
 								onClick={() => setOrderType("delivery")}
 								className={`flex flex-col items-center gap-1 rounded-xl border-2 px-4 py-5 text-center transition-colors ${
 									orderType === "delivery"
-										? "border-ink bg-ink text-paper"
-										: "border-ink bg-paper text-ink hover:bg-ink/5"
+										? "border-[#3d5a3a] bg-[#3d5a3a] text-white"
+										: "border-black/10 bg-white text-ink hover:bg-black/5"
 								}`}
 							>
-								<span className="text-2xl">🛵</span>
 								<span className="text-sm font-semibold">{t("delivery")}</span>
 								<span className="text-xs opacity-60">{t("deliveryDesc")}</span>
 							</button>
@@ -317,9 +326,9 @@ export default function CheckoutPage() {
 						<div className="mt-4 grid grid-cols-3 gap-3">
 							{(
 								[
-									{ value: "cash_usd", label: t("cashUsd"), icon: "💵", disabled: false },
-									{ value: "cash_lbp", label: t("cashLbp"), icon: "💴", disabled: false },
-									{ value: "card", label: t("card"), icon: "💳", disabled: true },
+									{ value: "cash_usd", label: t("cashUsd"), disabled: false },
+									{ value: "cash_lbp", label: t("cashLbp"), disabled: false },
+									{ value: "card", label: t("card"), disabled: true },
 								] as const
 							).map((opt) => (
 								<button
@@ -333,11 +342,10 @@ export default function CheckoutPage() {
 										opt.disabled
 											? "cursor-not-allowed border-rule bg-paper-2 text-ink-soft/30"
 											: paymentMethod === opt.value
-												? "border-ink bg-ink text-paper"
-												: "border-ink bg-paper text-ink hover:bg-ink/5"
+												? "border-[#3d5a3a] bg-[#3d5a3a] text-white"
+												: "border-black/10 bg-white text-ink hover:bg-black/5"
 									}`}
 								>
-									<span className="text-xl">{opt.icon}</span>
 									<span className="text-xs font-semibold">{opt.label}</span>
 									{opt.disabled && (
 										<span
@@ -435,6 +443,16 @@ export default function CheckoutPage() {
 							</div>
 						</div>
 
+						{/* API down message */}
+						{apiDown && (
+							<div className="mt-4 rounded-lg border border-[#3d5a3a]/30 bg-[#3d5a3a]/5 px-4 py-3 text-sm text-ink">
+								Ordering is temporarily unavailable. Please try again or call us at{" "}
+								<a href="tel:+9613286626" className="font-semibold underline">
+									+961 3 286 626
+								</a>
+							</div>
+						)}
+
 						{/* Error */}
 						{error && (
 							<p className="mt-4 rounded-lg border border-ink bg-ink/5 px-4 py-2 text-sm text-ink">
@@ -445,9 +463,31 @@ export default function CheckoutPage() {
 						{/* CTA */}
 						<button
 							type="submit"
-							disabled={!formValid || submitting}
-							className="mt-6 w-full rounded-full bg-ink py-3.5 text-sm font-semibold text-paper transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
+							disabled={!formValid || submitting || apiDown}
+							className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-[#3d5a3a] py-3.5 text-sm font-semibold text-white transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
 						>
+							{submitting && (
+								<svg
+									aria-hidden="true"
+									className="h-4 w-4 animate-spin"
+									viewBox="0 0 24 24"
+									fill="none"
+								>
+									<circle
+										className="opacity-25"
+										cx="12"
+										cy="12"
+										r="10"
+										stroke="currentColor"
+										strokeWidth="4"
+									/>
+									<path
+										className="opacity-75"
+										fill="currentColor"
+										d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+									/>
+								</svg>
+							)}
 							{submitting ? t("placing") : t("placeOrder")}
 						</button>
 

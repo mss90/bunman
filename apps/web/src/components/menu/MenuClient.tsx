@@ -2,10 +2,11 @@
 
 import { useCartStore } from "@/lib/cartStore";
 import { formatLbp, formatUsd } from "@/lib/formatPrice";
+import { useToastStore } from "@/lib/toastStore";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useCallback, useRef, useState } from "react";
-import { ModifierDrawer } from "./ModifierDrawer";
+import { ItemDetailModal } from "./ItemDetailModal";
 
 /* ------------------------------------------------------------------ */
 /*  Photo map: slug -> local image path                                */
@@ -79,10 +80,11 @@ interface MenuClientProps {
 export function MenuClient({ categories, items }: MenuClientProps) {
 	const t = useTranslations("menu");
 	const add = useCartStore((s) => s.add);
+	const showToast = useToastStore((s) => s.show);
 
 	const [mode, setMode] = useState<"pickup" | "delivery">("pickup");
 	const [activeCategory, setActiveCategory] = useState<string>(categories[0]?.id ?? "");
-	const [drawerItem, setDrawerItem] = useState<MenuItem | null>(null);
+	const [modalItem, setModalItem] = useState<MenuItem | null>(null);
 
 	/* refs for scroll-into-view */
 	const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -120,8 +122,9 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 				modifiers: defaultMods,
 				photoUrl: item.photoUrl,
 			});
+			showToast("Added to bag");
 		},
-		[add],
+		[add, showToast],
 	);
 
 	/* items grouped by category (preserving display order) */
@@ -218,7 +221,7 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 									key={item.id}
 									item={item}
 									onQuickAdd={quickAdd}
-									onCustomize={setDrawerItem}
+									onCustomize={setModalItem}
 									t={t}
 								/>
 							))}
@@ -227,8 +230,8 @@ export function MenuClient({ categories, items }: MenuClientProps) {
 				))}
 			</section>
 
-			{/* ---- Modifier drawer ---- */}
-			<ModifierDrawer item={drawerItem} onClose={() => setDrawerItem(null)} />
+			{/* ---- Item detail modal ---- */}
+			<ItemDetailModal item={modalItem} onClose={() => setModalItem(null)} />
 		</div>
 	);
 }
@@ -254,7 +257,18 @@ function MenuItemRow({
 
 	return (
 		<div
-			className={`flex items-start gap-4 border-b border-[#0d0d0d]/5 py-4 ${soldOut ? "opacity-40" : ""}`}
+			className={`flex items-start gap-4 border-b border-[#0d0d0d]/5 py-4 ${soldOut ? "opacity-40" : ""} ${!soldOut ? "cursor-pointer" : ""}`}
+			onClick={() => {
+				if (!soldOut) onCustomize(item);
+			}}
+			onKeyDown={(e) => {
+				if (!soldOut && (e.key === "Enter" || e.key === " ")) {
+					e.preventDefault();
+					onCustomize(item);
+				}
+			}}
+			role={soldOut ? undefined : "button"}
+			tabIndex={soldOut ? undefined : 0}
 		>
 			{/* Left side: text content */}
 			<div className="min-w-0 flex-1">
@@ -285,7 +299,10 @@ function MenuItemRow({
 					<button
 						type="button"
 						disabled={soldOut}
-						onClick={() => onQuickAdd(item)}
+						onClick={(e) => {
+							e.stopPropagation();
+							onQuickAdd(item);
+						}}
 						className="rounded-full bg-[#0d0d0d] px-4 py-1.5 text-xs font-semibold text-[#FFF8EC] transition-opacity duration-200 hover:opacity-80 disabled:pointer-events-none disabled:opacity-40"
 					>
 						Add
@@ -294,7 +311,10 @@ function MenuItemRow({
 						<button
 							type="button"
 							disabled={soldOut}
-							onClick={() => onCustomize(item)}
+							onClick={(e) => {
+								e.stopPropagation();
+								onCustomize(item);
+							}}
 							className="text-xs font-semibold text-[#0d0d0d]/60 underline underline-offset-2 transition-opacity duration-200 hover:opacity-70 disabled:pointer-events-none disabled:opacity-40"
 						>
 							{t("customize")}

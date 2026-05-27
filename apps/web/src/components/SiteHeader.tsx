@@ -9,6 +9,7 @@ import { CartDrawer } from "./CartDrawer";
 const NAV_LINKS = [
 	{ href: "/", labelKey: "home" },
 	{ href: "/menu", labelKey: "menu" },
+	{ href: "/orders", labelKey: "orders" },
 	{ href: "/merch", labelKey: "merch" },
 	{ href: "/about", labelKey: "about" },
 	{ href: "/contact", labelKey: "contact" },
