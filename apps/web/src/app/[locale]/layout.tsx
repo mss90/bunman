@@ -1,3 +1,4 @@
+import { InstallPrompt } from "@/components/InstallPrompt";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { routing } from "@/i18n/routing";
@@ -24,6 +25,13 @@ export const metadata: Metadata = {
 	title: "BUNMAN — Great burgers. Bad tantrums.",
 	description:
 		"Smash burgers born from a tantrum. Order pickup or delivery from Mar Mikhael, Beirut.",
+	manifest: "/manifest.webmanifest",
+	themeColor: "#b62a1a",
+	appleWebApp: {
+		capable: true,
+		statusBarStyle: "black-translucent",
+		title: "BUNMAN",
+	},
 };
 
 export default async function LocaleLayout({
@@ -48,6 +56,7 @@ export default async function LocaleLayout({
 					<SiteHeader />
 					<main className="flex-1">{children}</main>
 					<SiteFooter />
+					<InstallPrompt />
 				</NextIntlClientProvider>
 			</body>
 		</html>
