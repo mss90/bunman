@@ -119,21 +119,23 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 			{item && (
 				<div className="flex h-full flex-col">
 					{/* Scrollable body */}
-					<div className="flex-1 overflow-y-auto px-5 py-4">
+					<div className="flex-1 overflow-y-auto px-5 py-5">
 						{/* Item price header */}
-						<div className="mb-6">
-							<span className="num text-lg font-semibold text-ink">
+						<div className="mb-8 flex items-baseline gap-2">
+							<span className="num text-2xl font-semibold text-ink">
 								{formatUsd(item.basePriceUsd)}
 							</span>
-							<span className="num ml-2 text-sm text-ink-soft">{formatLbp(item.basePriceUsd)}</span>
+							<span className="num text-sm text-black/40">{formatLbp(item.basePriceUsd)}</span>
 						</div>
 
 						{/* Modifier groups */}
 						{item.modifierGroups.map((group) => (
-							<div key={group.id} className="mb-6">
-								<div className="flex items-center gap-2">
-									<h3 className="caps text-ink">{group.name}</h3>
-									<span className="caps text-ink-soft/60">
+							<div key={group.id} className="mb-8">
+								<div className="flex items-baseline justify-between">
+									<h3 className="text-sm font-semibold uppercase tracking-wider text-ink">
+										{group.name}
+									</h3>
+									<span className="text-xs text-black/40">
 										{group.isRequired
 											? t("required")
 											: group.maxSelect > 1
@@ -151,8 +153,10 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 										return (
 											<label
 												key={mod.id}
-												className={`flex cursor-pointer items-center gap-3 rounded-lg border-2 px-4 py-3 transition-colors duration-[var(--dur-fast)] select-none ${
-													checked ? "border-ink bg-ink/5" : "border-rule"
+												className={`flex cursor-pointer items-center gap-3 rounded-xl px-4 py-3.5 transition-all duration-200 select-none ${
+													checked
+														? "bg-black text-white"
+														: "bg-[#f5f5f5] text-ink hover:bg-[#ebebeb]"
 												}`}
 											>
 												<input
@@ -165,15 +169,19 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 												{/* Custom indicator */}
 												<span
 													className={`flex h-5 w-5 shrink-0 items-center justify-center border-2 transition-colors ${
-														isRadio ? "rounded-full" : "rounded-[4px]"
-													} ${checked ? "border-ink bg-ink" : "border-rule"}`}
+														isRadio ? "rounded-full" : "rounded-[5px]"
+													} ${
+														checked ? "border-white bg-white" : "border-black/20 bg-transparent"
+													}`}
 												>
-													{checked && <CheckIcon />}
+													{checked && <CheckIcon dark />}
 												</span>
 
-												<span className="flex-1 text-sm font-medium text-ink">{mod.name}</span>
+												<span className="flex-1 text-sm font-medium">{mod.name}</span>
 												{Number(mod.extraUsd) > 0 && (
-													<span className="num text-sm text-ink-soft">
+													<span
+														className={`num text-sm ${checked ? "text-white/70" : "text-black/40"}`}
+													>
 														+{formatUsd(mod.extraUsd)}
 													</span>
 												)}
@@ -185,13 +193,15 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 						))}
 
 						{/* Quantity stepper */}
-						<div className="mt-4">
-							<h3 className="caps text-ink">{t("qty")}</h3>
-							<div className="mt-3 inline-flex items-center rounded-full border-2 border-ink">
+						<div className="mt-6">
+							<h3 className="text-sm font-semibold uppercase tracking-wider text-ink">
+								{t("qty")}
+							</h3>
+							<div className="mt-3 inline-flex items-center rounded-full bg-[#f5f5f5]">
 								<button
 									type="button"
 									onClick={() => setQty((q) => Math.max(1, q - 1))}
-									className="flex h-10 w-10 items-center justify-center text-lg font-semibold text-ink transition-opacity hover:opacity-70 disabled:opacity-30"
+									className="flex h-11 w-11 items-center justify-center text-lg font-semibold text-ink transition-opacity hover:opacity-70 disabled:opacity-30"
 									disabled={qty <= 1}
 								>
 									&minus;
@@ -200,7 +210,7 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 								<button
 									type="button"
 									onClick={() => setQty((q) => Math.min(20, q + 1))}
-									className="flex h-10 w-10 items-center justify-center text-lg font-semibold text-ink transition-opacity hover:opacity-70 disabled:opacity-30"
+									className="flex h-11 w-11 items-center justify-center text-lg font-semibold text-ink transition-opacity hover:opacity-70 disabled:opacity-30"
 									disabled={qty >= 20}
 								>
 									+
@@ -210,11 +220,11 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 					</div>
 
 					{/* Sticky footer */}
-					<div className="sticky bottom-0 border-t border-rule bg-paper px-5 py-4">
+					<div className="border-t border-black/5 bg-white px-5 py-4">
 						<button
 							type="button"
 							onClick={handleAdd}
-							className="w-full rounded-full bg-ink py-3.5 text-sm font-semibold text-paper transition-opacity duration-[var(--dur-fast)] hover:opacity-80"
+							className="w-full rounded-xl bg-black py-4 text-base font-semibold text-white transition-opacity duration-200 hover:opacity-80"
 						>
 							{t("addToBun")} &middot; <span className="num">{formatUsd(totalUsd)}</span>
 						</button>
@@ -229,14 +239,14 @@ export function ModifierDrawer({ item, onClose }: ModifierDrawerProps) {
 /*  Tiny check icon                                                    */
 /* ------------------------------------------------------------------ */
 
-function CheckIcon() {
+function CheckIcon({ dark = false }: { dark?: boolean }) {
 	return (
 		<svg
 			width="12"
 			height="12"
 			viewBox="0 0 12 12"
 			fill="none"
-			stroke="white"
+			stroke={dark ? "black" : "white"}
 			strokeWidth="2"
 			strokeLinecap="round"
 			strokeLinejoin="round"

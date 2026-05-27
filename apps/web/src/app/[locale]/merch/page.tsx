@@ -1,59 +1,59 @@
-import { Bunman } from "@bunman/mascot";
-import "@bunman/mascot/animations.css";
+import Image from "next/image";
 
 const PRODUCTS = [
 	{
 		name: "Bunman Hoodie",
-		price: "$50",
+		price: "$50.00",
+		image: "/merch/hoodie.png",
 		description: "Heavyweight cotton hoodie. Black on black Bunman embroidery.",
 	},
 	{
 		name: "Bunman T-Shirt",
-		price: "$35",
+		price: "$35.00",
+		image: "/merch/tshirt.png",
 		description: "100% cotton tee. Bunman logo front, tantrum back.",
 	},
 ];
 
 export default function MerchPage() {
 	return (
-		<section className="mx-auto max-w-7xl px-5 py-16">
-			<p className="caps text-ink-soft">the merch.</p>
-			<h1 className="font-display mt-2 text-5xl text-ink">wear the tantrum.</h1>
+		<section className="mx-auto max-w-2xl px-5 py-16">
+			<h1 className="font-display text-center text-4xl uppercase tracking-wide text-ink">MERCH</h1>
 
 			{/* Product cards */}
-			<div className="mt-12 grid gap-6 sm:grid-cols-2">
+			<div className="mt-10 grid gap-6 sm:grid-cols-2">
 				{PRODUCTS.map((product) => (
 					<div
 						key={product.name}
-						className="flex flex-col items-center rounded-xl border border-ink bg-white p-8 text-center"
+						className="relative overflow-hidden rounded-2xl bg-white shadow-sm"
 					>
-						<Bunman pose="proud" size={120} />
-						<h2 className="font-display mt-6 text-2xl text-ink">{product.name}</h2>
-						<p className="mt-2 text-sm text-ink-soft">{product.description}</p>
-						<p className="font-display mt-4 text-3xl text-ink">{product.price}</p>
-						<p className="mt-2 text-xs text-ink-soft">Cash on delivery, 2-4 days</p>
+						{/* Product image */}
+						<div className="relative aspect-square bg-[#f5f5f5]">
+							<Image
+								src={product.image}
+								alt={product.name}
+								width={400}
+								height={400}
+								className="h-full w-full object-cover"
+							/>
+						</div>
+
+						{/* Info */}
+						<div className="p-5">
+							<h2 className="text-base font-semibold text-ink">{product.name}</h2>
+							<p className="mt-1 text-sm text-black/50">{product.description}</p>
+							<p className="mt-2 text-lg font-semibold text-ink">{product.price}</p>
+							<p className="mt-1 text-xs text-black/40">Cash on delivery &middot; 2-4 days</p>
+
+							{/* Coming soon badge */}
+							<div className="mt-4">
+								<span className="inline-block rounded-full bg-black/5 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-black/40">
+									Coming soon
+								</span>
+							</div>
+						</div>
 					</div>
 				))}
-			</div>
-
-			{/* Email signup */}
-			<div className="mt-16 flex flex-col items-center gap-6 text-center">
-				<p className="max-w-md text-lg text-ink-soft">
-					Want to know when new merch drops? Sign up and we&apos;ll let you know.
-				</p>
-				<div className="flex items-center gap-3">
-					<input
-						type="email"
-						placeholder="your email"
-						className="rounded-full border border-ink bg-white px-5 py-3 text-sm text-ink placeholder:text-ink-soft/40 focus:outline-none focus:ring-1 focus:ring-ink"
-					/>
-					<button
-						type="button"
-						className="rounded-full bg-ink px-6 py-3 text-sm font-semibold text-paper transition-opacity hover:opacity-80"
-					>
-						Notify me
-					</button>
-				</div>
 			</div>
 		</section>
 	);

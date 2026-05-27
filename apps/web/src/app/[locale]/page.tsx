@@ -1,14 +1,13 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const featured = [
 	{
 		src: "/menu/bunman-single.png",
-		name: "Bunman Cheeseburger",
+		name: "Bunman Single",
 		desc: "Our signature smash patty with American cheese.",
 	},
 	{
@@ -18,7 +17,7 @@ const featured = [
 	},
 	{
 		src: "/menu/classic-single.png",
-		name: "Classic Cheeseburger",
+		name: "Classic Single",
 		desc: "Simple. Clean. Smashed to perfection.",
 	},
 	{
@@ -29,8 +28,6 @@ const featured = [
 ] as const;
 
 export default function HomePage() {
-	const t = useTranslations("home");
-	const tc = useTranslations("common");
 	const [entered, setEntered] = useState(false);
 
 	useEffect(() => {
@@ -43,97 +40,105 @@ export default function HomePage() {
 			className={`transition-opacity duration-700 ease-out ${entered ? "opacity-100" : "opacity-0"}`}
 		>
 			{/* ───────────────── HERO ───────────────── */}
-			<section className="flex min-h-[90vh] flex-col items-center justify-center px-5 py-24">
+			<section className="flex min-h-[85vh] flex-col items-center justify-center px-5 py-24">
 				<Image
 					src="/logo.png"
 					alt="BUNMAN"
-					width={300}
-					height={100}
+					width={280}
+					height={93}
 					priority
-					className="mx-auto w-[200px] md:w-[300px]"
+					className="w-[180px] md:w-[280px]"
 				/>
 
-				{/* Tagline with typographic frame */}
-				<div className="mt-10 flex flex-col items-center">
-					<div className="h-px w-16 bg-black" />
-					<p className="font-display my-4 text-center text-2xl uppercase tracking-wide text-black md:text-4xl">
-						{t("headline")}
+				<div className="mt-10 flex flex-col items-center gap-1">
+					<p className="font-display text-xl uppercase tracking-[0.2em] text-black/80 md:text-3xl">
+						GREAT BURGERS.
 					</p>
-					<div className="h-px w-16 bg-black" />
+					<p className="font-display text-xl uppercase tracking-[0.2em] text-black/80 md:text-3xl">
+						BAD TANTRUMS.
+					</p>
 				</div>
 
-				{/* Location */}
-				<p className="mt-6 text-sm uppercase tracking-[0.25em] text-black/60">
-					Mar Mikhael, Beirut
-				</p>
+				<div className="mt-8 h-px w-12 bg-black/20" />
 
-				{/* View Menu link */}
+				<p className="mt-6 text-xs uppercase tracking-[0.3em] text-black/40">Mar Mikhael, Beirut</p>
+
 				<Link
 					href="/menu"
-					className="mt-8 text-sm uppercase tracking-widest text-black underline underline-offset-4 transition-opacity hover:opacity-50"
+					className="mt-10 rounded-full bg-black px-10 py-4 text-sm font-semibold uppercase tracking-widest text-white transition-opacity hover:opacity-80"
 				>
-					{tc("viewMenu")}
+					Order Now
+				</Link>
+
+				<Link
+					href="/menu"
+					className="mt-4 text-xs uppercase tracking-widest text-black/40 transition-opacity hover:opacity-70"
+				>
+					or view our menu &rarr;
 				</Link>
 			</section>
 
 			{/* ───────────── FEATURED ITEMS ───────────── */}
-			<section className="px-5 py-24">
-				<h2 className="font-display text-center text-4xl uppercase tracking-wide text-black md:text-5xl">
-					The Menu
-				</h2>
+			<section className="bg-[#fafafa] px-5 py-24">
+				<p className="text-center text-xs font-medium uppercase tracking-widest text-black/40">
+					Our Favorites
+				</p>
 
-				<div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+				{/* Horizontal scroll on mobile, 4-col grid on desktop */}
+				<div className="scrollbar-none mx-auto mt-12 flex max-w-5xl gap-5 overflow-x-auto px-1 pb-4 md:grid md:grid-cols-4 md:gap-6 md:overflow-visible md:px-0 md:pb-0">
 					{featured.map((item) => (
 						<Link
 							key={item.name}
 							href="/menu"
-							className="group flex flex-col items-center text-center transition-opacity hover:opacity-70"
+							className="group flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md"
+							style={{ width: "min(72vw, 260px)" }}
 						>
-							<div className="flex h-[300px] w-[300px] items-center justify-center">
+							<div className="flex items-center justify-center p-4" style={{ width: "100%" }}>
 								<Image
 									src={item.src}
 									alt={item.name}
-									width={300}
-									height={300}
-									className="object-cover"
+									width={200}
+									height={200}
+									className="object-contain"
 								/>
 							</div>
-							<h3 className="font-display mt-4 text-lg uppercase tracking-wide text-black">
-								{item.name}
-							</h3>
-							<p className="mt-1 text-sm text-black/50">{item.desc}</p>
+							<div className="px-5 pb-5">
+								<h3 className="text-sm font-semibold text-black">{item.name}</h3>
+								<p className="mt-1 text-xs text-black/50">{item.desc}</p>
+							</div>
 						</Link>
 					))}
 				</div>
 			</section>
 
-			{/* ───────────── ABOUT STRIP ───────────── */}
-			<section className="mx-auto max-w-[600px] px-5 py-24 text-center">
-				<h2 className="font-display text-3xl uppercase tracking-wide text-black md:text-4xl">
-					Born from a tantrum.
-				</h2>
-				<p className="mt-6 leading-relaxed text-black/60">
-					What started as a late-night craving and a refusal to settle for mediocre burgers became
-					BUNMAN. We smash patties thin, sear them hard, and keep everything honest. No gimmicks.
-					Just burgers done right in the heart of Beirut.
-				</p>
-				<Link
-					href="/about"
-					className="mt-6 inline-block text-sm uppercase tracking-widest text-black underline underline-offset-4 transition-opacity hover:opacity-50"
-				>
-					Read more &rarr;
-				</Link>
-			</section>
-
-			{/* ───────────── LOCATION ───────────── */}
-			<section className="px-5 py-24 text-center">
-				<h2 className="font-display text-3xl uppercase tracking-wide text-black md:text-4xl">
-					{t("findUsHeading")}
-				</h2>
-				<div className="mt-8 space-y-2 text-sm uppercase tracking-[0.2em] text-black/60">
-					<p>{t("findUsAddress")}</p>
-					<p>{t("findUsHours")}</p>
-					<p>{t("findUsPhone")}</p>
+			{/* ───────────── INFO STRIP ───────────── */}
+			<section className="px-5 py-20">
+				<div className="mx-auto grid max-w-3xl grid-cols-1 gap-12 text-center md:grid-cols-3 md:gap-8">
+					<div>
+						<p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-black/30">
+							Hours
+						</p>
+						<p className="mt-2 text-sm text-black/70">Open 7/7</p>
+						<p className="text-sm text-black/70">12pm &ndash; 12am</p>
+					</div>
+					<div>
+						<p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-black/30">
+							Location
+						</p>
+						<p className="mt-2 text-sm text-black/70">Mar Mikhael</p>
+						<p className="text-sm text-black/70">Beirut, Lebanon</p>
+					</div>
+					<div>
+						<p className="text-[0.65rem] font-bold uppercase tracking-[0.25em] text-black/30">
+							Phone
+						</p>
+						<a
+							href="tel:+9613286626"
+							className="mt-2 inline-block text-sm text-black/70 transition-opacity hover:opacity-50"
+						>
+							+961 3 286 626
+						</a>
+					</div>
 				</div>
 			</section>
 		</div>
