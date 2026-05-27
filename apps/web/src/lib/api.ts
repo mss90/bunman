@@ -12,21 +12,29 @@ class ApiError extends Error {
 }
 
 async function request<T>(path: string, opts?: RequestInit): Promise<T> {
-	const res = await fetch(`${API_URL}${path}`, {
-		...opts,
-		headers: {
-			"Content-Type": "application/json",
-			...opts?.headers,
-		},
-	});
+	const controller = new AbortController();
+	const timeout = setTimeout(() => controller.abort(), 8000);
 
-	if (!res.ok) {
-		const body = await res.json().catch(() => ({}));
-		const err = body.error ?? {};
-		throw new ApiError(res.status, err.code ?? "UNKNOWN", err.message ?? res.statusText);
+	try {
+		const res = await fetch(`${API_URL}${path}`, {
+			...opts,
+			signal: controller.signal,
+			headers: {
+				"Content-Type": "application/json",
+				...opts?.headers,
+			},
+		});
+
+		if (!res.ok) {
+			const body = await res.json().catch(() => ({}));
+			const err = body.error ?? {};
+			throw new ApiError(res.status, err.code ?? "UNKNOWN", err.message ?? res.statusText);
+		}
+
+		return res.json() as Promise<T>;
+	} finally {
+		clearTimeout(timeout);
 	}
-
-	return res.json() as Promise<T>;
 }
 
 export const api = {
