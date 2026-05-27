@@ -14,7 +14,7 @@
 		"db:seed": "pnpm --filter @bunman/db seed"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": ["@biomejs/biome", "esbuild"]
+		"onlyBuiltDependencies": ["@biomejs/biome", "esbuild", "@parcel/watcher", "@swc/core", "sharp"]
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",

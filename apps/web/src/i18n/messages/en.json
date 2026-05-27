@@ -1,0 +1,50 @@
+{
+	"common": {
+		"orderNow": "Order now",
+		"viewMenu": "View menu",
+		"home": "Home",
+		"menu": "Menu",
+		"merch": "Merch",
+		"about": "About",
+		"contact": "Contact",
+		"cart": "Cart",
+		"checkout": "Checkout",
+		"signIn": "Sign in"
+	},
+	"home": {
+		"eyebrow": "born from a tantrum.",
+		"headline": "smash burgers that hit different.",
+		"body": "We didn't set out to make the best burger in Beirut. We just got angry enough.",
+		"readLegend": "Read the legend",
+		"hours": "Mar Mikhael · open 7/7 12pm–12am"
+	},
+	"menu": {
+		"eyebrow": "the menu.",
+		"headline": "smash. eat. repeat.",
+		"soldOut": "Sold out for today",
+		"customize": "Customize",
+		"addToBun": "Add to bun",
+		"pickup": "Pickup",
+		"delivery": "Delivery"
+	},
+	"cart": {
+		"title": "your bag.",
+		"empty": "your bun is empty.",
+		"goGrabOne": "go grab one",
+		"checkout": "Checkout",
+		"clearBag": "Clear bag"
+	},
+	"order": {
+		"placed": "you smashed it.",
+		"tracking": "your order is on its way."
+	},
+	"error": {
+		"notFound": "this page made bunman mad.",
+		"goHome": "go home",
+		"goMenu": "go eat"
+	},
+	"footer": {
+		"tagline": "Great burgers. Bad tantrums.",
+		"rights": "BUNMAN. All rights reserved."
+	}
+}
